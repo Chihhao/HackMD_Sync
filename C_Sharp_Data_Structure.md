@@ -2,10 +2,15 @@
 tags: C#
 ---
 # C#-資料結構API
+* [Source Code](https://github.com/Chihhao/C_Sharp_Advance)
+* [Burt Zhang](https://www.youtube.com/channel/UCnA36j_KoX-Z0QsayrLCsOg/videos) 這個頻道搜集了很多個Eleven老師的教學影片，非常精彩。
+
+---
+
 ### 「陣列」Array, ArrayList, List
 內存連續分配，可座標訪問，==讀取快，增刪慢==
 * #### Array (固定類型)(固定長度)
-```C#
+```csharp
 int[] intArray = new int[10];
 intArray[0] = 87;
 string[] strArray = new string[3] { "1", "22", "333" };
@@ -14,7 +19,7 @@ for (int i = 0; i < strArray.Length; i++) {
 }
 ```
 * #### ArrayList (不固定類型)(不固定長度)
-```C#
+```csharp
 ArrayList arrayList = new ArrayList();  //宣告時不知道有多長
 arrayList.Add("0-Eleven");     //添加string數據，會增加長度
 arrayList.Add("1-Eric");
@@ -30,7 +35,7 @@ for (int i = 0; i < arrayList.Count; i++) {
 }
 ```
 * #### List (==泛型==)(不固定長度)(==最常用==)
-```C#
+```csharp
 List<int> intList = new List<int>();  //宣告時不知道有多長
 List<string> stringList = new List<string>();  //可以換成各種常用型別
 stringList.Add("0-Eleven");     //添加數據，會增加長度
@@ -48,7 +53,7 @@ for (int i = 0; i < stringList.Count; i++) {
 ### 「鏈表」LinkedList, Queue, Stack
 內存非連續分配，不可座標訪問，==增刪快，讀取慢==
 * #### LinkedList (泛型)(不固定長度)
-```C#
+```csharp
 LinkedList<int> intLinkList = new LinkedList<int>();
 intLinkList.AddFirst(123);
 intLinkList.AddFirst(456);
@@ -75,7 +80,7 @@ foreach (int item in intLinkList) {
 intLinkList.Clear();
 ```
 * #### Queue (泛型)(不固定長度)(先進先出)
-```C#
+```csharp
 Queue<string> stringQueue = new Queue<string>();  //建立隊列
 stringQueue.Enqueue("one");     //加入隊列
 stringQueue.Enqueue("two");
@@ -100,7 +105,7 @@ Console.WriteLine("隊列中有幾個元素: " + copyQueue.Count);
 copyQueue.Clear();
 ```
 * #### Stack (泛型)(不固定長度)(後進先出)
-```C#
+```csharp
 Stack<string> stringStack = new Stack<string>();  //建立堆疊
 stringStack.Push("one");     //加入堆疊
 stringStack.Push("two");
@@ -127,7 +132,7 @@ copyStack.Clear();
 ### 「集合」HashSet, SortedSet
 內存非連續分配，不可座標訪問，「**除去重複**」是集合最主要的價值
 * #### HashSet (泛型)(不固定長度)(去重)(沒有順序)
-```C#
+```csharp
 HashSet<string> stringHashSet = new HashSet<string>();  //建立集合
 stringHashSet.Add("zero");     // 加入集合
 stringHashSet.Add("one");
@@ -157,7 +162,7 @@ stringHashSet.ExceptWith(hashSet_2);          //差集
 stringHashSet.IntersectWith(hashSet_2);       //交集
 ```
 * #### SortedSet (泛型)(不固定長度)(去重)(==有順序==)
-```C#
+```csharp
 SortedSet<string> stringSortedSet = new SortedSet<string>();  //建立集合
 stringSortedSet.Add("zero");     // 加入集合
 stringSortedSet.Add("one");
@@ -177,7 +182,7 @@ Console.WriteLine("集合中有幾個元素: " + stringSortedSet.Count);
 查找數據時，利用Key一次定位，==增刪快，讀取也快！== (空間換時間)(數據多效率會下降)
 * #### Hashtable (object類型)(不固定長度)(資料不按加入順序)(無排序)
 object 類型 --> 需要一定的轉換時間 --> 效能損失
-```C#
+```csharp
 Hashtable hashtable = new Hashtable();  //建立哈希表
 hashtable.Add("zero", "0000000000");    //利用Key與Value加入哈希表
 hashtable.Add(1, "111111111");          //Key: 不固定類型
@@ -200,7 +205,7 @@ Console.WriteLine("hashtable 是不是線程安全的？ {0}", hashtable.IsSynch
 Console.WriteLine("mySyncdHT 是不是線程安全的？ {0}", mySyncdHT.IsSynchronized ? "是" : "否");
 ```
 * #### Dictionary (泛型)(不固定長度)(資料按加入順序)(無排序)
-```C#
+```csharp
 Dictionary<int, string> dictionary = new Dictionary<int, string>();  //建立字典
 dictionary.Add(1, "Jack");        //利用Key與Value加入字典
 dictionary.Add(5, "Kevin");
@@ -221,7 +226,7 @@ ConcurrentDictionary<int, string> concurrentDictionary =
     new ConcurrentDictionary<int, string>(dictionary);    
 ```
 * #### SortedDictionary (泛型)(不固定長度)(資料按加入順序)(有排序)
-```C#
+```csharp
 SortedDictionary<int, string> sortedDictionary = new SortedDictionary<int, string>();  //建立字典
 sortedDictionary.Add(1, "Jack");        //利用Key與Value加入字典
 sortedDictionary.Add(5, "Kevin");
