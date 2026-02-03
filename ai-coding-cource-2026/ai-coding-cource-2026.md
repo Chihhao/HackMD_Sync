@@ -40,6 +40,7 @@
   * **對策**: AI 不懂硬體副作用。涉及 `WriteRegister` 或 `Bitwise` 操作時，必須人工嚴格審查。
 * **關鍵術語的轉換**
   * **Magic Numbers**: AI 不知道 `0x40` 是什麼。請先提供 Datasheet 定義或 Enum，AI 才能寫出可讀性高的程式碼。
+  * **Volatile 關鍵字**: AI 容易忽略 `volatile`，導致編譯器優化掉關鍵的硬體讀寫操作。請務必檢查暫存器變數宣告。
   * **Bitwise**: AI 非常擅長解釋複雜的位元運算 (`&`, `|`, `<<`)，可多利用它來生成註解。
 * **AI 對語言的掌握度差異 (Assembly vs ATL)**
   * **組合語言 (Assembly)**: ⭐⭐⭐⭐⭐ (精通)
@@ -51,6 +52,9 @@
     * **對策**: 
       * **提供上下文**: 必須貼上 Header 檔或 API 範例 (Few-Shot)。
       * **分工**: 邏輯運算交給 AI，硬體控制 (Driver) 需人工查閱 Manual。
+* **資安意識 (Security First)**
+  * **脫敏原則**: 雖然使用內部 AI，仍建議將 **Project Code Name**、**具體良率數值** 或 **客戶名稱** 替換為代號 (如 `Project_A`)。
+  * **核心 IP 保護**: 涉及晶片核心架構 (Architecture) 的機密文件，請勿整份上傳，僅擷取與程式邏輯相關的段落。
 
 ---
 
@@ -202,6 +206,17 @@
 > [附上 C++ 程式碼]
 > ```
 
+### 🧱 NAND Flash 壞塊管理 (BBM) 實作
+**情境**: 處理 NAND Flash 特有的 Bad Block 標記與邏輯。
+> **Prompt**:
+> ```text
+> 你是一位 NAND Flash 測試專家。請根據以下規格實作 `CheckBadBlock(block_index)` 函式：
+> 1. **規格**: 讀取該 Block 第一個 Page 的 Spare Area 第 0 個 Byte (Column 2048)。若非 `0xFF`，則視為壞塊。
+> 2. **限制**: 使用 `ReadSpare(addr, buffer)` API。
+> 3. **邊界檢查**: 確保 `block_index` 在合法範圍內 (0 ~ 1023)。
+> 4. **輸出**: 回傳 `true` (是壞塊) 或 `false` (是好塊)。
+> ```
+
 ### 📝 自動化文件生成 (Auto-Doc)
 **情境**: 接手沒有文件的舊專案。
 > **Prompt**:
@@ -238,6 +253,17 @@
 > 1. 使用 `WriteRegister(addr, data)` 和 `ReadRegister(addr)` 函式。
 > 2. 實作 Timeout 機制，若超時回傳 `ERR_TIMEOUT`。
 > 3. 不要使用 `sleep()`，請使用迴圈輪詢 (Polling)。
+> ```
+
+### 🐞 錯誤日誌分析 (Log Analysis)
+**情境**: 機台噴出 cryptic error code 或大量 Fail Log，看不出頭緒。
+> **Prompt**:
+> ```text
+> 我在 T5581 機台上遇到了以下錯誤訊息。
+> 請分析可能的原因，並依照可能性高低列出排查步驟 (Checklist)。
+> 若涉及硬體接觸不良 (Contact Issue) 或 Timing Violation，請特別標註。
+>
+> [附上 Error Log 或 Error Code]
 > ```
 
 

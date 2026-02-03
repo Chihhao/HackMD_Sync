@@ -37,6 +37,9 @@ TE 的程式庫通常累積了數十年的歷史，且受限於機台編譯器�
     *   *風險*: AI 為了優化程式結構，可能會擅自移動 Relay 切換指令的位置。
 *   **Settling Time (穩定時間)**：電壓設定後需要時間穩定。
     *   *風險*: AI 常常會覺得 `wait(5ms)` 是無用的效能損耗而建議刪除，TE 必須嚴格把關。
+*   **Pattern Memory (向量記憶體)**：儲存 0/1 波形的專用記憶體，極度昂貴且有限。
+    *   *SE Note*: AI 產生 Pattern 時傾向 "Unroll Loop" (展開迴圈)，這會導致 Pattern Memory 溢位 (Out of Memory)。
+    *   *解法*: 必須引導 AI 使用機台支援的 "Repeat" 或 "Subroutine" 指令來壓縮 Pattern 大小。
 
 ## 3. 關鍵領域術語手冊 (Terminology)
 
@@ -108,9 +111,24 @@ TE 的程式庫通常累積了數十年的歷史，且受限於機台編譯器�
 *   **Offline Simulation (離線模擬)**
     *   *痛點*: 機台時間昂貴，TE 只能半夜排隊除錯。
     *   *解法*: 引入 **Mocking** 觀念，建立 "Mock Hardware Library" 模擬 `WriteRegister` 或 `MeasureVoltage` 的行為（例如回傳隨機值或固定值），讓 TE 能在自己的筆電上編譯並驗證邏輯，不用搶機台。
+        ```cpp
+        // Mocking 範例 (Header-only 簡單切換，適合老舊編譯器)
+        #ifdef OFFLINE_SIMULATION
+            // 模擬硬體行為 (Mock)
+            void WriteRegister(int addr, int data) {
+                printf("[MOCK] Write Addr: 0x%X, Data: 0x%X\n", addr, data);
+            }
+        #else
+            // 真實機台 API
+            #include "ate_driver.h"
+        #endif
+        ```
 *   **Git 與二進位檔策略**
     *   *痛點*: TE 習慣用 "Copy Folder" 備份，因為專案包含大量二進位檔 (.pat, .stdf) 會塞爆 Git。
     *   *解法*: 協助設定 `.gitignore` 精準排除巨型檔案，或開發 Python Script 自動將二進位檔備份到 NAS，只對 Source Code 做 Git 版控。
+*   **CI/CD 與靜態分析 (Linter)**
+    *   *痛點*: TE 往往要等到上機台編譯 (Compile on Tester) 才知道有語法錯誤，浪費機台時間。
+    *   *解法*: 幫 TE 建立簡單的 Pre-commit Hook 或 CI Pipeline。雖然無法連結 ATE Library，但可以跑 `g++ -fsyntax-only` 或 `cppcheck`，提前抓出變數未宣告、括號不對稱等低級錯誤。
 *   **防禦性程式設計**
     *   *差異*: ATE 上 Exception 可能導致危險。
     *   *解法*: 推廣 **Return Code** 模式與 Error Propagation，並請 AI 協助檢查是否所有硬體操作函式都有判斷回傳值，確保硬體狀態能被 Reset。
