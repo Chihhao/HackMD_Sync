@@ -92,20 +92,20 @@ TE 的程式庫通常累積了數十年的歷史，且受限於機台編譯器�
 
 作為 SE，你可以透過工具與觀念引導，解決 TE 的痛點並規避 AI 風險。
 
-### ⚠️ AI 幻覺與風險控制
+### AI 幻覺與風險控制
 *   **虛構 API**：AI 可能幻想 V93000 有某個方便的 `std::vector` 支援，或混淆 Teradyne 與 Advantest 的語法。
 *   **記憶體洩漏 (Memory Leak)**：測試程式通常是 24 小時不間斷運行。AI 習慣的 `new`/`malloc` 若無嚴格釋放，微小的 Leak 也會導致機台當機 (Crash)。
 *   **檔案誤用**：TE 專案包含巨大的 `.pat` (Pattern) 或 `.tim` (Timing) 純文字檔。
     *   *Action*: 設定工具的 **副檔名白名單**，只允許 `.c`, `.cpp`, `.h`，避免爆 Token。
 
-### 💡 AI 應用場景 (High Value)
+### AI 應用場景 (High Value)
 1.  **Legacy Code 重構**：將 Magic Numbers 提取為 `Spec.h` 中的具名常數。
 2.  **演算法驗證 (Oracle)**：Flash 測試常涉及複雜的 **ECC** 或 **Scramble** 演算法。請 AI 用 Python 寫出對應邏輯作為「對照組」，驗證 C++ 實作的正確性。
 3.  **自動化文件 (Auto-Doc)**：讀取 C++ Header 檔與實作，自動生成 Markdown 格式的 API 文件，解釋每個 Test Function 的測試目的與參數意義。
 4.  **數據分析**：利用 Python (`pystdf`) 解析 STDF，繪製 **Shmoo Plot**、良率分佈圖，或進行 **Correlation** 比對。
 5.  **規格轉程式 (SDD)**：將 Datasheet 文字貼給 AI，生成 **Command Sequence** 程式碼。
 
-### 🛠️ SE 工程賦能 (Best Practices)
+### SE 工程賦能 (Best Practices)
 除了 AI，SE 的核心能力也能解決 TE 的痛點：
 
 *   **Offline Simulation (離線模擬)**

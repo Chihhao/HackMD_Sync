@@ -62,7 +62,7 @@
 
 ---
 
-## 4. 程式碼區塊 (Code Blocks) 🔥 *工程師必學*
+## 4. 程式碼區塊 (Code Blocks) *工程師必學*
 使用三個反引號 \`\`\` 包裹程式碼，並可指定語言以啟用語法高亮 (Syntax Highlighting)。
 
 **C# 範例：**
@@ -111,7 +111,7 @@ public class HelloWorld
 
 ## 6. 進階：Mermaid 圖表
 HedgeDoc 支援直接渲染 Mermaid 語法。
-*💡 小撇步：不需要背語法，請直接叫 AI 幫你畫！*
+*小撇步：不需要背語法，請直接叫 AI 幫你畫！*
 
 ````markdown
 ```mermaid

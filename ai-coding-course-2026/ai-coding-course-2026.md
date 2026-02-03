@@ -23,7 +23,7 @@
   * **純文字特性 (.md)**：輕量、通用，方便作為 Prompt 餵給 AI。
 * **HedgeDoc 實戰 (架設在 BE，不用擔心資料外流)**
   * **核心功能**: 即時預覽、多人協作編輯、網頁分享 (Publish)。
-    * 👉 **[演示時間] 請切換至 [md-intro.md](./md-intro.md) 講解 Markdown 語法細節**
+    * **[演示時間] 請切換至 [md-intro.md](./md-intro.md) 講解 Markdown 語法細節**
 
 ---
 
@@ -43,10 +43,10 @@
   * **Volatile 關鍵字**: AI 容易忽略 `volatile`，導致編譯器優化掉關鍵的硬體讀寫操作。請務必檢查暫存器變數宣告。
   * **Bitwise**: AI 非常擅長解釋複雜的位元運算 (`&`, `|`, `<<`)，可多利用它來生成註解。
 * **AI 對語言的掌握度差異 (Assembly vs ATL)**
-  * **組合語言 (Assembly)**: ⭐⭐⭐⭐⭐ (精通)
+  * **組合語言 (Assembly)**: (精通)
     * **原因**: x86, ARM, RISC-V 等架構資料豐富，是 AI 訓練資料的一部分。
     * **應用**: 除錯 (解釋反組譯代碼)、效能分析 (比較指令數)。
-  * **Advantest Test Language (ATL)**: ⭐⭐ (入門 ~ 懂語法但不懂 API)
+  * **Advantest Test Language (ATL)**: (入門 ~ 懂語法但不懂 API)
     * **原因**: 封閉性 (Proprietary) 且資料受 NDA 保護，公開資料極少。
     * **風險**: AI 精通基礎語法 (C++/Java)，但極易對機台專屬 API (如 `TEST_METHOD`) 產生幻覺。
     * **對策**: 
@@ -177,13 +177,13 @@
     * **TE 注意事項**: 避免勾選 `.pat` (Pattern) 或 `.tim` (Timing) 等巨型檔案，以免瞬間消耗大量 Token。僅勾選 `.c`, `.cpp`, `.h` 即可。
   * **多模態整合**: 支援圖片分析與文字附件混用。
   * **生產力工具**: 支援 Markdown 原始碼複製、編輯/刪除單則訊息、自訂系統提示詞、分享。
-* 👉 **[演示時間] 請切換至 Xiaowan-intro.md 進行完整功能導覽**
+* **[演示時間] 請切換至 Xiaowan-intro.md 進行完整功能導覽**
 
 ## 7. 給 TE 的 AI Prompt 範本大全
 
 這裡整理了針對 TE 日常任務的最佳化提示詞，請直接複製並根據需求微調。
 
-### 🛠️ 程式碼重構與現代化 (Refactoring)
+### 程式碼重構與現代化 (Refactoring)
 **情境**: 處理充滿 Magic Numbers 的舊程式碼。
 > **Prompt**:
 > ```text
@@ -196,7 +196,7 @@
 > [附上程式碼]
 > ```
 
-### 🧪 邏輯演算法驗證 (Algorithm Oracle)
+### 邏輯演算法驗證 (Algorithm Oracle)
 **情境**: 驗證複雜的 ECC 或 Scramble 演算法是否正確。
 > **Prompt**:
 > ```text
@@ -206,7 +206,7 @@
 > [附上 C++ 程式碼]
 > ```
 
-### 🧱 NAND Flash 壞塊管理 (BBM) 實作
+### NAND Flash 壞塊管理 (BBM) 實作
 **情境**: 處理 NAND Flash 特有的 Bad Block 標記與邏輯。
 > **Prompt**:
 > ```text
@@ -217,7 +217,7 @@
 > 4. **輸出**: 回傳 `true` (是壞塊) 或 `false` (是好塊)。
 > ```
 
-### 📝 自動化文件生成 (Auto-Doc)
+### 自動化文件生成 (Auto-Doc)
 **情境**: 接手沒有文件的舊專案。
 > **Prompt**:
 > ```text
@@ -230,7 +230,7 @@
 > [附上 .h 與 .cpp 內容]
 > ```
 
-### 📊 數據分析與視覺化 (Data Analysis)
+### 數據分析與視覺化 (Data Analysis)
 **情境**: 分析 STDF 或 CSV 測試數據。
 > **Prompt**:
 > ```text
@@ -240,7 +240,7 @@
 > 3. 計算每個 VCC 電壓下的最高可運作頻率 (Fmax)。
 > ```
 
-### ⚙️ 規格轉程式 (Spec to Code)
+### 規格轉程式 (Spec to Code)
 **情境**: 看著 Datasheet 寫 Command Sequence。
 > **Prompt**:
 > ```text
@@ -255,7 +255,7 @@
 > 3. 不要使用 `sleep()`，請使用迴圈輪詢 (Polling)。
 > ```
 
-### 🐞 錯誤日誌分析 (Log Analysis)
+### 錯誤日誌分析 (Log Analysis)
 **情境**: 機台噴出 cryptic error code 或大量 Fail Log，看不出頭緒。
 > **Prompt**:
 > ```text
