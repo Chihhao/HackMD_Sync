@@ -133,7 +133,7 @@
 
     <!-- Presentation Modal -->
     <div id="presentation-mode" class="fixed inset-0 z-[100] bg-black hidden transition-opacity duration-300">
-        <iframe id="main-frame" class="w-full h-full border-none bg-white"></iframe>
+        <iframe id="main-frame" class="w-full h-full border-none bg-black"></iframe>
         
         <!-- Controls -->
         <div class="absolute bottom-8 right-8 flex gap-4 z-50">
@@ -226,6 +226,34 @@
             document.getElementById('btn-prev').disabled = currentSlideIndex === 1;
             document.getElementById('btn-next').disabled = currentSlideIndex === totalSlides;
         }
+
+        function scaleSlideContent() {
+            const frame = document.getElementById('main-frame');
+            try {
+                const doc = frame.contentDocument || frame.contentWindow.document;
+                const container = doc.querySelector('.slide-container');
+                if (container) {
+                    doc.body.style.margin = '0';
+                    doc.body.style.overflow = 'hidden';
+                    doc.body.style.display = 'flex';
+                    doc.body.style.justifyContent = 'center';
+                    doc.body.style.alignItems = 'center';
+                    doc.body.style.height = '100vh';
+                    doc.body.style.backgroundColor = '#000';
+                    
+                    const scale = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+                    container.style.transform = `scale(${scale})`;
+                    container.style.transformOrigin = 'center center';
+                }
+            } catch(e) {}
+        }
+
+        document.getElementById('main-frame').onload = scaleSlideContent;
+        window.addEventListener('resize', () => {
+            if (!document.getElementById('presentation-mode').classList.contains('hidden')) {
+                scaleSlideContent();
+            }
+        });
 
         document.addEventListener('keydown', (e) => {
             if (document.getElementById('presentation-mode').classList.contains('hidden')) return;
