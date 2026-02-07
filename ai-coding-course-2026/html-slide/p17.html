@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI 小旺：Coding 模式實戰</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .tech-accent {
+            color: #17A2B8;
+        }
+        .bg-tech-accent {
+            background-color: #17A2B8;
+        }
+        .border-tech-accent {
+            border-color: #17A2B8;
+        }
+        /* Dot grid pattern */
+        .bg-dots {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23E9ECEF'/%3E%3C/svg%3E");
+        }
+        .mono-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Step arrow connector */
+        .step-connector {
+            flex: 1;
+            height: 2px;
+            background-color: #E5E7EB;
+            margin: 0 1rem;
+            position: relative;
+        }
+        .step-connector::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 6px solid #E5E7EB;
+        }
+        /* Custom Scrollbar for mock UI */
+        .mock-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .mock-scroll::-webkit-scrollbar-thumb {
+            background-color: #CBD5E0;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-dots">
+<!-- Background Decor -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-cyan-50 rounded-full opacity-40 -translate-y-1/3 translate-x-1/3"></div>
+<div class="absolute bottom-20 left-10 w-32 h-32 border-4 border-gray-100 rounded-full opacity-60"></div>
+<!-- Header Section -->
+<div class="px-16 pt-10 pb-2 flex justify-between items-end relative z-10">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded uppercase tracking-wider">Workflow Mastery</span>
+<span class="h-px w-8 bg-gray-300"></span>
+</div>
+<h1 class="text-4xl font-black text-gray-800 tracking-tight">AI 小旺：Coding 模式實戰</h1>
+<p class="text-xl text-gray-500 mt-2 font-light">從讀取到「一鍵套用」的完整閉環：<span class="border-b-2 border-[#17A2B8] text-gray-600">自動同步與安全審查</span></p>
+</div>
+<!-- Top Right Icon -->
+<div class="opacity-100">
+<div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200">
+<i class="fas fa-terminal text-[#17A2B8] text-xs"></i>
+<p class="text-xs font-mono text-gray-500">Internal GPT-5 Tool</p>
+</div>
+</div>
+</div>
+<!-- Main Content: App Interface Simulation -->
+<div class="flex-1 px-16 py-4 flex flex-col items-center relative z-10">
+<!-- App Window -->
+<div class="w-full max-w-5xl h-[380px] bg-white rounded-lg shadow-2xl border border-gray-200 flex flex-col overflow-hidden mb-6">
+<!-- App Toolbar -->
+<div class="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
+<div class="flex items-center space-x-4">
+<div class="flex space-x-2">
+<div class="w-3 h-3 rounded-full bg-red-500"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+<div class="w-3 h-3 rounded-full bg-green-500"></div>
+</div>
+<span class="text-gray-300 text-xs font-mono ml-2"><i class="fas fa-robot mr-2"></i>AI Xiao Wang - Coding Mode</span>
+</div>
+<div class="flex items-center space-x-3">
+<div class="px-2 py-0.5 bg-gray-700 rounded text-[10px] text-green-400 font-mono flex items-center">
+<i class="fas fa-sync-alt mr-1 fa-spin text-[8px]"></i> Auto Sync On
+                    </div>
+<div class="w-20 bg-gray-600 rounded-full h-1.5 overflow-hidden">
+<div class="bg-[#17A2B8] h-full" style="width: 35%"></div>
+</div>
+<span class="text-gray-400 text-[10px] font-mono">210KB / 600KB</span>
+</div>
+</div>
+<!-- App Body -->
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar: File Selection -->
+<div class="w-1/4 bg-gray-50 border-r border-gray-200 flex flex-col">
+<div class="p-3 border-b border-gray-200 bg-gray-100">
+<p class="text-xs font-bold text-gray-600 uppercase tracking-wider">Project Files</p>
+</div>
+<div class="flex-1 overflow-y-auto p-2 space-y-1 mock-scroll">
+<!-- Selected File -->
+<div class="flex items-center p-2 bg-white border border-[#17A2B8] rounded shadow-sm">
+<input checked="" class="accent-[#17A2B8]" type="checkbox"/>
+<i class="fab fa-cuttlefish text-blue-600 mx-2 text-sm"></i>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-bold text-gray-800 truncate">driver_v2.cpp</p>
+<p class="text-[10px] text-gray-500">12 KB</p>
+</div>
+</div>
+<!-- Selected File -->
+<div class="flex items-center p-2 bg-white border border-gray-200 rounded hover:bg-gray-50">
+<input checked="" class="accent-[#17A2B8]" type="checkbox"/>
+<i class="fas fa-file-code text-yellow-600 mx-2 text-sm"></i>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-medium text-gray-600 truncate">utils.h</p>
+<p class="text-[10px] text-gray-500">4 KB</p>
+</div>
+</div>
+<!-- Disabled File (Too Large) -->
+<div class="flex items-center p-2 bg-gray-100 border border-gray-200 rounded opacity-60 cursor-not-allowed">
+<input disabled="" type="checkbox"/>
+<i class="fas fa-database text-gray-400 mx-2 text-sm"></i>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-medium text-gray-500 truncate decoration-gray-400">waveform_data.pat</p>
+<p class="text-[10px] text-red-500 font-bold">15 MB (Too Large)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Area: Chat & Diff -->
+<div class="flex-1 bg-white flex flex-col">
+<!-- Chat History -->
+<div class="flex-1 p-4 overflow-y-auto font-mono text-xs">
+<div class="flex gap-3 mb-4">
+<div class="w-6 h-6 rounded bg-[#17A2B8] text-white flex items-center justify-center flex-shrink-0"><i class="fas fa-robot text-[10px]"></i></div>
+<div class="bg-gray-50 p-3 rounded-lg border border-gray-100 w-full">
+<p class="text-gray-700 mb-2">我發現 <code class="bg-gray-200 px-1 rounded text-red-500">WriteRegister</code> 函數缺少時序保護。我建議在寫入前加入等待檢查。以下是修改建議：</p>
+<!-- Diff View Mockup -->
+<div class="border border-gray-300 rounded overflow-hidden">
+<div class="bg-gray-100 px-2 py-1 border-b border-gray-300 text-[10px] text-gray-500 flex justify-between">
+<span>driver_v2.cpp</span>
+<span>Diff View</span>
+</div>
+<div class="bg-[#2d2d2d] p-2 text-gray-300 leading-tight">
+<div class="flex"><span class="text-gray-600 w-6 select-none">42</span><span>void WriteRegister(int addr, int val) {</span></div>
+<div class="flex bg-red-900/30"><span class="text-red-500 w-6 select-none">-</span><span class="text-red-300">    HW_WRITE(addr, val);</span></div>
+<div class="flex bg-green-900/30"><span class="text-green-500 w-6 select-none">+</span><span class="text-green-300">    while(HW_BUSY()); // Wait for idle</span></div>
+<div class="flex bg-green-900/30"><span class="text-green-500 w-6 select-none">+</span><span class="text-green-300">    HW_WRITE(addr, val);</span></div>
+<div class="flex"><span class="text-gray-600 w-6 select-none">45</span><span>}</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="p-3 border-t border-gray-200 bg-gray-50 flex justify-end items-center gap-3">
+<p class="text-[10px] text-gray-500 mr-auto"><i class="fas fa-shield-alt text-orange-500 mr-1"></i>Please review timing critical code manually.</p>
+<button class="px-3 py-1.5 rounded border border-gray-300 text-gray-600 text-xs font-medium hover:bg-gray-100">Reject</button>
+<button class="px-3 py-1.5 rounded bg-[#17A2B8] text-white text-xs font-bold hover:bg-[#138496] shadow-sm flex items-center">
+<i class="fas fa-check mr-1.5"></i> Apply Patch
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Workflow Steps (Bottom) -->
+<div class="w-full max-w-6xl mt-auto mb-4 px-10">
+<div class="flex justify-between items-start relative">
+<!-- Step 1 -->
+<div class="flex flex-col items-center flex-1 z-10 group">
+<div class="w-12 h-12 bg-white border-2 border-gray-200 rounded-xl flex items-center justify-center shadow-md mb-2 text-gray-600 group-hover:border-[#17A2B8] group-hover:text-[#17A2B8] transition-colors">
+<i class="fas fa-tasks text-xl"></i>
+</div>
+<h3 class="font-bold text-gray-700 text-sm">1. 挑選檔案</h3>
+<p class="text-xs text-gray-400 mt-1 text-center leading-tight">排除 .pat 巨型檔<br/>聚焦核心邏輯</p>
+</div>
+<!-- Connector -->
+<div class="step-connector mt-6"></div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center flex-1 z-10 group">
+<div class="w-12 h-12 bg-white border-2 border-gray-200 rounded-xl flex items-center justify-center shadow-md mb-2 text-gray-600 group-hover:border-[#17A2B8] group-hover:text-[#17A2B8] transition-colors">
+<i class="fas fa-tachometer-alt text-xl"></i>
+</div>
+<h3 class="font-bold text-gray-700 text-sm">2. 容量控制</h3>
+<p class="text-xs text-gray-400 mt-1 text-center leading-tight">維持 600KB 內<br/>預留對話空間</p>
+</div>
+<!-- Connector -->
+<div class="step-connector mt-6"></div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center flex-1 z-10 group">
+<div class="w-12 h-12 bg-white border-2 border-[#17A2B8] rounded-xl flex items-center justify-center shadow-md mb-2 text-[#17A2B8]">
+<i class="fas fa-sync-alt text-xl fa-spin-hover"></i>
+</div>
+<h3 class="font-bold text-[#17A2B8] text-sm">3. 自動同步</h3>
+<p class="text-xs text-gray-400 mt-1 text-center leading-tight">每回合重讀硬碟<br/>確保版本最新</p>
+</div>
+<!-- Connector -->
+<div class="step-connector mt-6"></div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center flex-1 z-10 group">
+<div class="w-12 h-12 bg-white border-2 border-green-500 rounded-xl flex items-center justify-center shadow-md mb-2 text-green-500">
+<i class="fas fa-check-double text-xl"></i>
+</div>
+<h3 class="font-bold text-gray-700 text-sm">4. 審查套用</h3>
+<p class="text-xs text-gray-400 mt-1 text-center leading-tight">Diff 檢視無誤<br/>一鍵寫回檔案</p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-16 py-6 flex justify-between items-center text-gray-400 text-xs font-mono relative z-10">
+<p>AI 輔助開發基礎課程 (2026)</p>
+<p>Page 17</p>
+</div>
+</div>
+<style>
+        .fa-spin-hover:hover {
+            animation: fa-spin 2s infinite linear;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>總結與實踐建議</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .bg-dots {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23E9ECEF'/%3E%3C/svg%3E");
+        }
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        /* Custom Checkbox Style */
+        .check-item {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .check-item::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 1.25rem;
+            height: 1.25rem;
+            background-color: #E3F2FD;
+            color: #0056B3;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+        /* Progress Circle */
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-dots">
+<!-- Background Decor -->
+<div class="absolute bottom-0 right-0 w-[40%] h-[15%] bg-gray-50 -z-0"></div>
+<!-- Header Section -->
+<div class="px-16 pt-10 pb-4 flex justify-between items-end relative z-10">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-gray-800 text-white text-xs font-bold rounded uppercase tracking-wider">Summary &amp; CTA</span>
+<span class="h-px w-8 bg-gray-300"></span>
+</div>
+<h1 class="text-4xl font-black text-gray-800 tracking-tight">總結與實踐建議</h1>
+<p class="text-xl text-gray-500 mt-2 font-light">從學習到落地：<span class="border-b-2 border-[#17A2B8] text-gray-600">BE PTE 工程師行動指南</span></p>
+</div>
+<!-- Top Right Icon -->
+<div class="opacity-100">
+<div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200">
+<i class="fas fa-flag-checkered text-[#17A2B8] text-xs"></i>
+<p class="text-xs font-mono text-gray-500">Next Steps</p>
+</div>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="flex-1 px-16 py-6 pb-10 grid grid-cols-3 gap-8 relative z-10">
+<!-- Column 1: Recap (Problem -> Solution) -->
+<div class="flex flex-col h-full gap-4">
+<div class="bg-white p-5 rounded-xl border-l-4 border-red-400 card-shadow">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-red-500">
+<i class="fas fa-exclamation-triangle"></i>
+</div>
+<h3 class="font-bold text-gray-700 text-lg">面臨挑戰</h3>
+</div>
+<ul class="space-y-2 text-sm text-gray-600">
+<li class="flex items-start gap-2">
+<i class="fas fa-lock text-red-300 mt-1 text-xs"></i>
+<p>內部資安限制 (API only)</p>
+</li>
+<li class="flex items-start gap-2">
+<i class="fas fa-eye-slash text-red-300 mt-1 text-xs"></i>
+<p>ATL 封閉語法導致幻覺</p>
+</li>
+<li class="flex items-start gap-2">
+<i class="fas fa-microchip text-red-300 mt-1 text-xs"></i>
+<p>SE/TE 思維與環境差異</p>
+</li>
+</ul>
+</div>
+<div class="flex justify-center -my-2 z-10">
+<div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center border border-gray-200">
+<i class="fas fa-arrow-down text-gray-400 text-xs"></i>
+</div>
+</div>
+<div class="bg-white p-5 rounded-xl border-l-4 border-[#17A2B8] card-shadow flex-grow">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-8 h-8 rounded-full bg-cyan-50 flex items-center justify-center text-[#17A2B8]">
+<i class="fas fa-key"></i>
+</div>
+<h3 class="font-bold text-gray-700 text-lg">核心解法</h3>
+</div>
+<ul class="space-y-3 text-sm text-gray-600">
+<li class="flex items-start gap-2">
+<i class="fas fa-robot text-[#17A2B8] mt-1 text-xs"></i>
+<div>
+<p class="font-bold text-gray-800">AI 小旺 Coding 模式</p>
+<p class="text-xs text-gray-500">自動同步 Context，杜絕舊檔干擾</p>
+</div>
+</li>
+<li class="flex items-start gap-2">
+<i class="fas fa-sliders-h text-[#17A2B8] mt-1 text-xs"></i>
+<div>
+<p class="font-bold text-gray-800">System Prompt</p>
+<p class="text-xs text-gray-500">全域設定 No Hallucination + C++98</p>
+</div>
+</li>
+<li class="flex items-start gap-2">
+<i class="fas fa-file-contract text-[#17A2B8] mt-1 text-xs"></i>
+<div>
+<p class="font-bold text-gray-800">SDD &amp; TDD</p>
+<p class="text-xs text-gray-500">規格先行，測試驅動，驗證為王</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- Column 2: Action Checklist (The Core CTA) -->
+<div class="bg-[#0056B3] rounded-xl p-1 shadow-lg text-white hover-lift flex flex-col">
+<div class="bg-white rounded-lg h-full p-6 flex flex-col">
+<div class="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4">
+<i class="fas fa-clipboard-check text-[#0056B3] text-2xl"></i>
+<div>
+<h3 class="font-bold text-gray-800 text-xl">Action Checklist</h3>
+<p class="text-xs text-gray-500">立即可以開始執行的行動</p>
+</div>
+</div>
+<div class="space-y-5 flex-grow">
+<div class="check-item">
+<p class="font-bold text-gray-800 text-sm">數位化紀錄</p>
+<p class="text-xs text-gray-500 mt-1">全面改用 Markdown + HedgeDoc 撰寫技術文件與會議記錄。</p>
+</div>
+<div class="check-item">
+<p class="font-bold text-gray-800 text-sm">資安習慣養成</p>
+<p class="text-xs text-gray-500 mt-1">建立個人的「脫敏關鍵字表」，每次貼 Log 前先過濾。</p>
+</div>
+<div class="check-item">
+<p class="font-bold text-gray-800 text-sm">建立 Prompt 範本庫</p>
+<p class="text-xs text-gray-500 mt-1">針對 ATE 常見場景 (如 Shmoo Plot, Pin Map) 建立 Few-Shot 範例。</p>
+</div>
+<div class="check-item">
+<p class="font-bold text-gray-800 text-sm">啟用 Coding 模式</p>
+<p class="text-xs text-gray-500 mt-1">停止複製貼上，使用小旺讀取本機檔案並進行 Diff 審查。</p>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-gray-100 text-center">
+<p class="text-xs text-gray-400 italic">"Automation is a habit, not a tool."</p>
+</div>
+</div>
+</div>
+<!-- Column 3: KPIs & Success Metrics -->
+<div class="flex flex-col gap-6">
+<div class="bg-white p-6 rounded-xl card-shadow h-full flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-600">
+<i class="fas fa-chart-line"></i>
+</div>
+<h3 class="font-bold text-gray-700 text-lg">預期效益 (KPIs)</h3>
+</div>
+<div class="space-y-6">
+<!-- KPI 1 -->
+<div class="flex items-center justify-between">
+<div>
+<p class="text-xs text-gray-500 uppercase font-bold tracking-wider">Dev Cycle Time</p>
+<p class="text-sm text-gray-600">開發迭代速度</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-black text-green-600">-40%</p>
+<p class="text-[10px] text-green-500"><i class="fas fa-arrow-down"></i> 時間成本</p>
+</div>
+</div>
+<div class="w-full bg-gray-100 rounded-full h-1.5">
+<div class="bg-green-500 h-1.5 rounded-full" style="width: 60%"></div>
+</div>
+<!-- KPI 2 -->
+<div class="flex items-center justify-between pt-2">
+<div>
+<p class="text-xs text-gray-500 uppercase font-bold tracking-wider">Doc Coverage</p>
+<p class="text-sm text-gray-600">文件覆蓋率 (SDD)</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-black text-[#17A2B8]">+80%</p>
+<p class="text-[10px] text-[#17A2B8]"><i class="fas fa-arrow-up"></i> 完整度</p>
+</div>
+</div>
+<div class="w-full bg-gray-100 rounded-full h-1.5">
+<div class="bg-[#17A2B8] h-1.5 rounded-full" style="width: 80%"></div>
+</div>
+<!-- KPI 3 -->
+<div class="flex items-center justify-between pt-2">
+<div>
+<p class="text-xs text-gray-500 uppercase font-bold tracking-wider">Code Quality</p>
+<p class="text-sm text-gray-600">Bug 檢出率 (Pre-commit)</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-black text-[#0056B3]">High</p>
+<p class="text-[10px] text-[#0056B3]"><i class="fas fa-star"></i> AI Review</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-16 py-6 flex justify-between items-center text-gray-400 text-xs font-mono relative z-10">
+<p>AI 輔助開發基礎課程 (2026)</p>
+<p>Page 19</p>
+</div>
+</div>
+</body>
+</html>

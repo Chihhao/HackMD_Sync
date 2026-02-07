@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI 對話的進階技巧</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .bg-dots {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23E9ECEF'/%3E%3C/svg%3E");
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .icon-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+        }
+        .tech-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Custom border accents */
+        .accent-top-blue { border-top: 4px solid #0056B3; }
+        .accent-top-purple { border-top: 4px solid #6F42C1; }
+        .accent-top-cyan { border-top: 4px solid #17A2B8; }
+        .accent-top-orange { border-top: 4px solid #FD7E14; }
+        
+        .code-snippet {
+            background-color: #F8F9FA;
+            border: 1px solid #E9ECEF;
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 0.75rem;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-dots">
+<!-- Background Decor -->
+<div class="absolute top-0 right-0 w-[20%] h-[30%] bg-gray-50 rounded-bl-full -z-0"></div>
+<!-- Header Section -->
+<div class="px-16 pt-10 pb-4 flex justify-between items-end relative z-10">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-gray-800 text-white text-xs font-bold rounded uppercase tracking-wider">Advanced Skills</span>
+<span class="h-px w-8 bg-gray-300"></span>
+</div>
+<h1 class="text-4xl font-black text-gray-800 tracking-tight">AI 對話的進階技巧</h1>
+<p class="text-xl text-gray-500 mt-2 font-light">讓 AI 輸出更精準、更有邏輯：<span class="border-b-2 border-[#17A2B8] text-gray-600">四大溝通武器</span></p>
+</div>
+<!-- Top Right Icon -->
+<div class="opacity-100">
+<div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200">
+<i class="fas fa-tools text-[#17A2B8] text-xs"></i>
+<p class="text-xs font-mono text-gray-500">Toolbox</p>
+</div>
+</div>
+</div>
+<!-- Main Content: 2x2 Grid -->
+<div class="flex-1 px-16 py-6 pb-12 relative z-10">
+<div class="grid grid-cols-2 grid-rows-2 gap-6 h-full">
+<!-- Card 1: 反向提問 (Reverse Questioning) -->
+<div class="bg-white rounded-xl shadow-sm p-6 card-hover border border-gray-100 accent-top-blue flex flex-col relative overflow-hidden">
+<div class="absolute right-0 top-0 opacity-5 transform translate-x-4 -translate-y-4">
+<i class="fas fa-question-circle text-9xl text-[#0056B3]"></i>
+</div>
+<div class="flex items-center gap-4 mb-3 relative">
+<div class="icon-box bg-blue-50 text-[#0056B3]">
+<i class="fas fa-exchange-alt text-xl"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-800">1. 反向提問 (Flipped)</h3>
+</div>
+<p class="text-sm text-gray-600 mb-4 leading-relaxed flex-grow">
+                        當你不知道如何精確描述需求，或需求很模糊時，不要急著下指令。請 AI 變成「採訪者」，讓它來問你問題，釐清規格。
+                    </p>
+<!-- Visual/Example -->
+<div class="code-snippet tech-font mt-auto">
+<p class="mb-1"><span class="text-blue-600 font-bold">&gt; User:</span> 我想寫一個測試程式，但我不知道從何開始。</p>
+<p><span class="text-green-600 font-bold">&gt; Prompt:</span> "請你扮演資深 TE，詢問我關於這個測試的 5 個關鍵問題，以幫助你寫出正確的 Code。"</p>
+</div>
+</div>
+<!-- Card 2: 思維鏈 (Chain of Thought) -->
+<div class="bg-white rounded-xl shadow-sm p-6 card-hover border border-gray-100 accent-top-purple flex flex-col relative overflow-hidden">
+<div class="absolute right-0 top-0 opacity-5 transform translate-x-4 -translate-y-4">
+<i class="fas fa-brain text-9xl text-[#6F42C1]"></i>
+</div>
+<div class="flex items-center gap-4 mb-3 relative">
+<div class="icon-box bg-purple-50 text-[#6F42C1]">
+<i class="fas fa-link text-xl"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-800">2. 思維鏈 (CoT)</h3>
+</div>
+<p class="text-sm text-gray-600 mb-4 leading-relaxed flex-grow">
+                        對於複雜邏輯（如位元運算、演算法），強制 AI 展示推理過程。這能顯著降低 AI 「跳過步驟」導致的邏輯錯誤。
+                    </p>
+<!-- Visual/Example -->
+<div class="code-snippet tech-font mt-auto">
+<p class="mb-1"><span class="text-blue-600 font-bold">&gt; Prompt:</span> "請一步步思考 (Let's think step by step)。"</p>
+<div class="flex items-center gap-2 mt-2 text-[10px] text-gray-400">
+<span class="border border-gray-300 px-1 rounded">Step 1</span>
+<i class="fas fa-arrow-right"></i>
+<span class="border border-gray-300 px-1 rounded">Step 2</span>
+<i class="fas fa-arrow-right"></i>
+<span class="border border-purple-200 bg-purple-50 text-purple-700 px-1 rounded font-bold">Result</span>
+</div>
+</div>
+</div>
+<!-- Card 3: 範例引導 (Few-Shot Prompting) -->
+<div class="bg-white rounded-xl shadow-sm p-6 card-hover border border-gray-100 accent-top-cyan flex flex-col relative overflow-hidden">
+<div class="absolute right-0 top-0 opacity-5 transform translate-x-4 -translate-y-4">
+<i class="fas fa-copy text-9xl text-[#17A2B8]"></i>
+</div>
+<div class="flex items-center gap-4 mb-3 relative">
+<div class="icon-box bg-cyan-50 text-[#17A2B8]">
+<i class="fas fa-clone text-xl"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-800">3. 範例引導 (Few-Shot)</h3>
+</div>
+<p class="text-sm text-gray-600 mb-4 leading-relaxed flex-grow">
+                        人類是模仿的動物，AI 也是。與其寫一千字的描述，不如直接給它 1-2 個 Input/Output 的範例。這是解決 ATL 語法幻覺最強的解法。
+                    </p>
+<!-- Visual/Example -->
+<div class="code-snippet tech-font mt-auto">
+<p class="text-gray-400 italic">// Don't explain. Just show.</p>
+<p><span class="text-blue-600">Ex1:</span> Input: A -&gt; Output: Code_A</p>
+<p><span class="text-blue-600">Ex2:</span> Input: B -&gt; Output: Code_B</p>
+<p class="font-bold text-gray-800">Task: Input: C -&gt; Output: ???</p>
+</div>
+</div>
+<!-- Card 4: 任務拆解 (Task Decomposition) -->
+<div class="bg-white rounded-xl shadow-sm p-6 card-hover border border-gray-100 accent-top-orange flex flex-col relative overflow-hidden">
+<div class="absolute right-0 top-0 opacity-5 transform translate-x-4 -translate-y-4">
+<i class="fas fa-cubes text-9xl text-[#FD7E14]"></i>
+</div>
+<div class="flex items-center gap-4 mb-3 relative">
+<div class="icon-box bg-orange-50 text-[#FD7E14]">
+<i class="fas fa-th-large text-xl"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-800">4. 任務拆解 (Decomposition)</h3>
+</div>
+<p class="text-sm text-gray-600 mb-4 leading-relaxed flex-grow">
+                        不要試圖讓 AI 一次寫完 500 行的程式。它的 Context 和注意力有限。將大任務拆解成小模組，分批執行，正確率會大幅提升。
+                    </p>
+<!-- Visual/Example -->
+<div class="flex gap-2 mt-auto">
+<div class="flex-1 bg-gray-50 border border-dashed border-gray-300 rounded p-2 text-center">
+<i class="fas fa-cube text-gray-300 mb-1"></i>
+<p class="text-[10px] text-gray-500">定義介面</p>
+</div>
+<div class="flex items-center text-gray-300"><i class="fas fa-chevron-right text-xs"></i></div>
+<div class="flex-1 bg-gray-50 border border-dashed border-gray-300 rounded p-2 text-center">
+<i class="fas fa-code text-gray-300 mb-1"></i>
+<p class="text-[10px] text-gray-500">實作邏輯</p>
+</div>
+<div class="flex items-center text-gray-300"><i class="fas fa-chevron-right text-xs"></i></div>
+<div class="flex-1 bg-gray-50 border border-dashed border-gray-300 rounded p-2 text-center">
+<i class="fas fa-vial text-gray-300 mb-1"></i>
+<p class="text-[10px] text-gray-500">生成測試</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-16 py-6 flex justify-between items-center text-gray-400 text-xs font-mono relative z-10">
+<p>AI 輔助開發基礎課程 (2026)</p>
+<p>Page 16</p>
+</div>
+</div>
+</body>
+</html>

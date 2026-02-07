@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Token 量化與 600KB 的秘密</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .bg-dots {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23E9ECEF'/%3E%3C/svg%3E");
+        }
+        .bar-stripe {
+            background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+            background-size: 1rem 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-dots">
+<!-- Background Elements -->
+<div class="absolute top-0 right-0 w-[30%] h-full bg-slate-50 border-l border-gray-100 -z-0"></div>
+<!-- Header Section -->
+<div class="px-16 pt-10 pb-4 flex justify-between items-end relative z-10">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded uppercase tracking-wider border border-blue-100">Context Window Management</span>
+<span class="h-px w-8 bg-gray-300"></span>
+</div>
+<h1 class="text-4xl font-black text-gray-800 tracking-tight">Token：AI 的計量單位</h1>
+<p class="text-xl text-gray-500 mt-2 font-light">為什麼小旺限制 600KB？—— <span class="border-b-2 border-[#17A2B8] text-gray-600">理解記憶體配額</span></p>
+</div>
+<!-- Top Right Icon -->
+<div class="opacity-100">
+<div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200">
+<i class="fas fa-memory text-[#17A2B8] text-xl"></i>
+<p class="text-xs font-mono text-gray-500">270k Capacity</p>
+</div>
+</div>
+</div>
+<!-- Main Content -->
+<div class="flex-1 px-16 py-6 relative z-10 flex flex-col justify-between">
+<!-- Top Metric Cards -->
+<div class="grid grid-cols-3 gap-6 mb-8">
+<!-- Card 1: Conversion -->
+<div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-gray-500">
+<i class="fas fa-calculator text-xl"></i>
+</div>
+<div>
+<p class="text-xs text-gray-500 font-bold uppercase tracking-wider">Conversion Rate</p>
+<p class="text-lg font-bold text-gray-800 mt-1">
+<span class="font-mono text-2xl">1,000</span> Tokens
+                        </p>
+<p class="text-sm text-gray-500">≈ 750 English Words</p>
+</div>
+</div>
+<!-- Card 2: 600KB Impact -->
+<div class="bg-[#17A2B8] bg-opacity-10 p-5 rounded-xl border border-[#17A2B8] border-opacity-30 shadow-sm flex items-center gap-4 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 text-[#17A2B8] opacity-10">
+<i class="fas fa-file-code text-9xl"></i>
+</div>
+<div class="w-12 h-12 bg-[#17A2B8] rounded-full flex items-center justify-center text-white z-10">
+<i class="fas fa-weight-hanging text-xl"></i>
+</div>
+<div class="z-10">
+<p class="text-xs text-[#17A2B8] font-bold uppercase tracking-wider">File Limit Cost</p>
+<p class="text-lg font-bold text-gray-800 mt-1">
+<span class="font-mono text-2xl">600</span> KB Code
+                        </p>
+<p class="text-sm text-gray-600 font-bold">≈ 150k - 200k Tokens</p>
+</div>
+</div>
+<!-- Card 3: Model Capacity -->
+<div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-white">
+<i class="fas fa-brain text-xl"></i>
+</div>
+<div>
+<p class="text-xs text-gray-500 font-bold uppercase tracking-wider">GPT-5 Total</p>
+<p class="text-lg font-bold text-gray-800 mt-1">
+<span class="font-mono text-2xl">270,000</span> Tokens
+                        </p>
+<p class="text-sm text-gray-500">Hard Limit</p>
+</div>
+</div>
+</div>
+<!-- Visualization Section -->
+<div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm flex-1 flex flex-col justify-center relative">
+<h3 class="text-lg font-bold text-gray-700 mb-6 flex items-center gap-2">
+<i class="fas fa-chart-bar text-[#17A2B8]"></i>
+                    Context Window Visualization (270k)
+                </h3>
+<!-- The Bar Container -->
+<div class="relative w-full h-24 bg-gray-100 rounded-lg overflow-hidden flex border border-gray-300">
+<!-- Segment 1: System Prompt (Fixed Overhead) -->
+<div class="h-full bg-gray-400 flex items-center justify-center text-white text-xs font-bold border-r border-white relative group" style="width: 15%">
+<div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
+<span class="z-10 text-center px-2">System<br/>Prompt<br/>(~40k)</span>
+</div>
+<!-- Segment 2: 600KB Code (The Heavy Lifter) -->
+<div class="h-full bg-[#17A2B8] bar-stripe flex items-center justify-center text-white text-sm font-bold border-r border-white relative group" style="width: 70%">
+<div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity"></div>
+<div class="flex flex-col items-center">
+<i class="fas fa-file-code mb-1 text-2xl opacity-80"></i>
+<span class="text-lg">600KB Code Context</span>
+<span class="text-xs font-mono opacity-80">~190k Tokens</span>
+</div>
+</div>
+<!-- Segment 3: Remaining Space (Critical for Chat) -->
+<div class="h-full bg-green-50 flex items-center justify-center text-green-700 text-xs font-bold relative group" style="width: 15%">
+<div class="absolute inset-0 border-2 border-dashed border-green-200 rounded-r-lg"></div>
+<span class="z-10 text-center px-2">Active<br/>Memory<br/>(~40k)</span>
+</div>
+</div>
+<!-- Labels & Arrows -->
+<div class="flex justify-between mt-4 px-2">
+<div class="w-[15%] text-center">
+<div class="h-4 border-l border-gray-300 mx-auto mb-1"></div>
+<p class="text-xs text-gray-400">Fixed Overhead</p>
+</div>
+<div class="w-[70%] text-center relative">
+<div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-white px-2 text-[#17A2B8] text-xs font-bold">
+<i class="fas fa-arrow-up"></i> 主量體
+                        </div>
+<p class="text-sm text-gray-600 font-medium">為何選檔要精準？</p>
+<p class="text-xs text-gray-400 mt-1">若此區塊撐爆，將擠壓右側空間</p>
+</div>
+<div class="w-[15%] text-center">
+<div class="h-4 border-l border-green-300 mx-auto mb-1"></div>
+<p class="text-xs text-green-600 font-bold">思考緩衝區</p>
+</div>
+</div>
+</div>
+<!-- Bottom Alert -->
+<div class="mt-6 flex items-start gap-4 bg-orange-50 p-4 rounded-lg border border-orange-100">
+<div class="mt-1">
+<i class="fas fa-exclamation-triangle text-orange-400 text-xl"></i>
+</div>
+<div>
+<h4 class="font-bold text-gray-800 text-sm">避免「記憶溢位 (Context Overflow)」</h4>
+<p class="text-sm text-gray-600 mt-1">
+                        若程式碼佔滿 270k Token，AI 會被迫「遺忘」最早的 System Prompt 或你剛下的指令（Amnesia）。<br/>
+<span class="font-bold text-orange-600">這就是為什麼小旺限制 600KB：</span> 為了確保 AI 還有足夠的「短期記憶」來理解你的需求並產生回應。
+                    </p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-16 py-6 flex justify-between items-center text-gray-400 text-xs font-mono relative z-10">
+<p>AI 輔助開發基礎課程 (2026)</p>
+<p>Page 12</p>
+</div>
+</div>
+</body>
+</html>

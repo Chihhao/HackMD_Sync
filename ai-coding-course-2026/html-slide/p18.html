@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>小旺的隱藏優勢：Context 刷新機制</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .tech-accent {
+            color: #17A2B8;
+        }
+        .bg-tech-accent {
+            background-color: #17A2B8;
+        }
+        .border-tech-accent {
+            border-color: #17A2B8;
+        }
+        .bg-dots {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23E9ECEF'/%3E%3C/svg%3E");
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-dots">
+<!-- Background Elements -->
+<div class="absolute top-0 right-0 w-[40%] h-full bg-slate-50 border-l border-gray-100 -z-0"></div>
+<!-- Header Section -->
+<div class="px-16 pt-12 pb-4 flex justify-between items-end relative z-10">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded uppercase tracking-wider">Advanced Features</span>
+<span class="h-px w-8 bg-gray-300"></span>
+</div>
+<h1 class="text-4xl font-black text-gray-800 tracking-tight">小旺的隱藏優勢：Context 刷新機制</h1>
+<p class="text-xl text-gray-500 mt-2 font-light">告別幻覺：<span class="border-b-2 border-[#17A2B8] text-gray-600">確保 AI 永遠讀取最新代碼</span></p>
+</div>
+<!-- Top Right Icon -->
+<div class="opacity-100">
+<div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200">
+<i class="fas fa-microchip text-gray-400 text-xs"></i>
+<p class="text-xs font-mono text-gray-500">Mechanism Deep Dive</p>
+</div>
+</div>
+</div>
+<!-- Main Content: Split Layout -->
+<div class="flex-1 flex px-16 py-4 relative z-10 gap-12 items-center">
+<!-- Left Column: General Mode (Pain Points) -->
+<div class="flex-1 flex flex-col h-full justify-center">
+<div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 relative overflow-hidden group">
+<!-- Watermark Icon -->
+<div class="absolute -right-4 -bottom-4 text-gray-50 opacity-50 text-9xl pointer-events-none">
+<i class="fas fa-history"></i>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center">
+<i class="fas fa-comments text-gray-500 text-lg"></i>
+</div>
+<h2 class="text-2xl font-bold text-gray-700">一般對話模式 (General Mode)</h2>
+</div>
+<!-- Visual Representation of Stacked Context -->
+<div class="mb-6 bg-gray-50 p-4 rounded-lg border border-gray-100 border-dashed">
+<div class="flex flex-col gap-2 items-center opacity-70">
+<div class="w-[80%] h-2 bg-gray-200 rounded"></div>
+<div class="w-[90%] h-8 bg-gray-200 rounded border border-gray-300 flex items-center justify-center text-[10px] text-gray-400 font-mono">Ver. 1 (Old Code)</div>
+<div class="w-full h-8 bg-gray-300 rounded border border-gray-400 flex items-center justify-center text-[10px] text-gray-500 font-mono relative">
+                            Ver. 2 (Modified)
+                            <i class="fas fa-exclamation-triangle text-amber-500 absolute -right-2 -top-2 text-xs"></i>
+</div>
+<div class="w-[95%] h-8 bg-white rounded border border-red-200 shadow-sm flex items-center justify-center text-[10px] text-gray-600 font-mono font-bold">Ver. 3 (Current)</div>
+</div>
+<p class="text-center text-xs text-gray-400 mt-2">Context 堆疊混亂</p>
+</div>
+<!-- Limit List -->
+<div class="space-y-4">
+<!-- Point 1 -->
+<div class="flex items-start gap-3 opacity-80 group-hover:opacity-100 transition-opacity">
+<i class="fas fa-times-circle text-gray-400 mt-1 flex-shrink-0"></i>
+<div>
+<p class="font-bold text-gray-700">資訊冗餘與混淆</p>
+<p class="text-sm text-gray-500">舊程式碼與新修改版本同時存在對話紀錄中，佔用大量 Token。</p>
+</div>
+</div>
+<!-- Point 2 -->
+<div class="flex items-start gap-3 opacity-80 group-hover:opacity-100 transition-opacity">
+<i class="fas fa-exclamation-circle text-red-400 mt-1 flex-shrink-0"></i>
+<div>
+<p class="font-bold text-gray-700">容易產生幻覺</p>
+<p class="text-sm text-gray-500">AI 容易混淆前後文，錯誤地引用已經被修改掉的舊邏輯。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Coding Mode (Advantages) -->
+<div class="flex-1 flex flex-col h-full justify-center transform translate-y-4">
+<div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden ring-1 ring-black/5">
+<!-- Top Highlight Bar -->
+<div class="absolute top-0 left-0 w-full h-1 bg-[#17A2B8]"></div>
+<!-- Decorative Glow -->
+<div class="absolute -top-24 -right-24 w-48 h-48 bg-[#17A2B8] rounded-full blur-3xl opacity-10"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-lg bg-[#17A2B8] flex items-center justify-center text-white shadow-lg shadow-cyan-500/30">
+<i class="fas fa-code text-lg"></i>
+</div>
+<div>
+<h2 class="text-2xl font-bold text-gray-800">Coding 模式 <span class="text-[#17A2B8]">解決方案</span></h2>
+<p class="text-xs text-gray-400 font-mono tracking-wide">AUTO CONTEXT REFRESH</p>
+</div>
+</div>
+<!-- Visual Representation of Refresh -->
+<div class="mb-6 bg-cyan-50/50 p-4 rounded-lg border border-cyan-100 relative">
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full flex justify-center z-0 opacity-20">
+<i class="fas fa-sync-alt text-6xl text-[#17A2B8]"></i>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-full h-12 bg-white rounded border border-[#17A2B8] shadow-md flex items-center justify-between px-4">
+<span class="text-xs font-mono text-gray-600 font-bold">Latest_File.cpp</span>
+<span class="px-2 py-0.5 bg-[#17A2B8] text-white text-[10px] rounded-full">LIVE</span>
+</div>
+<i class="fas fa-arrow-up text-[#17A2B8] text-sm animate-bounce"></i>
+<p class="text-[10px] text-[#17A2B8] font-mono">每回合自動重新讀取硬碟檔案</p>
+</div>
+</div>
+<!-- Advantage List -->
+<div class="space-y-5">
+<!-- Adv 1 -->
+<div class="flex items-start gap-4">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-cyan-50 border border-cyan-100 flex items-center justify-center">
+<i class="fas fa-check text-[#17A2B8] text-xs"></i>
+</div>
+<div class="w-px h-full bg-cyan-100 my-1"></div>
+</div>
+<div>
+<p class="font-bold text-gray-800 text-lg">自動同步最新代碼</p>
+<p class="text-sm text-gray-600 mt-1">每一回合送出對話時，系統強制重新讀取本機檔案，確保 Context 永遠最新。</p>
+</div>
+</div>
+<!-- Adv 2 -->
+<div class="flex items-start gap-4">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-cyan-50 border border-cyan-100 flex items-center justify-center">
+<i class="fas fa-check text-[#17A2B8] text-xs"></i>
+</div>
+<div class="w-px h-full bg-cyan-100 my-1"></div>
+</div>
+<div>
+<p class="font-bold text-gray-800 text-lg">降低幻覺風險</p>
+<p class="text-sm text-gray-600 mt-1">因為舊代碼被自動替換，AI 不會再被過時的邏輯誤導。</p>
+</div>
+</div>
+<!-- Adv 3 -->
+<div class="flex items-start gap-4">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 rounded-full bg-cyan-50 border border-cyan-100 flex items-center justify-center">
+<i class="fas fa-check text-[#17A2B8] text-xs"></i>
+</div>
+</div>
+<div>
+<p class="font-bold text-gray-800 text-lg">提高一致性與可追溯</p>
+<p class="text-sm text-gray-600 mt-1">確保 AI 的建議永遠基於當前的真實狀況，大幅提升 Debug 效率。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-16 py-6 flex justify-between items-center text-gray-400 text-xs font-mono relative z-10">
+<p>AI 輔助開發基礎課程 (2026)</p>
+<p>Page 18</p>
+</div>
+</div>
+</body>
+</html>

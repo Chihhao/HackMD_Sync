@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HedgeDoc 實戰演練</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .tech-accent {
+            color: #17A2B8;
+        }
+        .bg-tech-accent {
+            background-color: #17A2B8;
+        }
+        .border-tech-accent {
+            border-color: #17A2B8;
+        }
+        /* Dot grid pattern */
+        .bg-dots {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23E9ECEF'/%3E%3C/svg%3E");
+        }
+        .mono-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Custom cursor for collaboration simulation */
+        .cursor-tag {
+            position: absolute;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            color: white;
+            white-space: nowrap;
+            top: -20px;
+            left: -2px;
+        }
+        .cursor-line {
+            position: absolute;
+            width: 2px;
+            height: 18px;
+            background-color: currentColor;
+        }
+        /* Step arrow connector */
+        .step-connector {
+            flex: 1;
+            height: 2px;
+            background-color: #E5E7EB;
+            margin: 0 1rem;
+            position: relative;
+        }
+        .step-connector::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 6px solid #E5E7EB;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-dots">
+<!-- Background Decor -->
+<div class="absolute bottom-0 right-0 w-96 h-96 bg-gray-50 rounded-full opacity-50 -translate-y-1/2 translate-x-1/3"></div>
+<!-- Header Section -->
+<div class="px-16 pt-10 pb-2 flex justify-between items-end relative z-10">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded uppercase tracking-wider">Collaboration Tool</span>
+<span class="h-px w-8 bg-gray-300"></span>
+</div>
+<h1 class="text-4xl font-black text-gray-800 tracking-tight">HedgeDoc 實戰演練</h1>
+<p class="text-xl text-gray-500 mt-2 font-light">打造團隊的技術知識庫：<span class="border-b-2 border-[#17A2B8] text-gray-600">即時協作與發布</span></p>
+</div>
+<!-- Top Right Icon -->
+<div class="opacity-100">
+<div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200">
+<i class="fas fa-users text-[#17A2B8] text-xs"></i>
+<p class="text-xs font-mono text-gray-500">BE Internal Network</p>
+</div>
+</div>
+</div>
+<!-- Main Content: Collaborative Window Simulation -->
+<div class="flex-1 px-16 py-6 flex flex-col items-center relative z-10">
+<!-- Browser Window -->
+<div class="w-full max-w-5xl bg-white rounded-lg shadow-2xl border border-gray-200 flex flex-col overflow-hidden mb-8 transform transition-transform hover:-translate-y-1 duration-300">
+<!-- Browser Toolbar -->
+<div class="bg-gray-100 px-4 py-2 flex items-center border-b border-gray-200">
+<div class="flex space-x-2 mr-4">
+<div class="w-3 h-3 rounded-full bg-red-400"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+<div class="w-3 h-3 rounded-full bg-green-400"></div>
+</div>
+<!-- Address Bar -->
+<div class="flex-1 bg-white rounded-md px-3 py-1 text-xs text-gray-500 flex items-center shadow-inner">
+<i class="fas fa-lock text-green-500 mr-2 text-[10px]"></i>
+<span class="font-mono">https://hedgedoc.internal/s/Project_Titan_Report</span>
+</div>
+<!-- Avatars -->
+<div class="ml-4 flex -space-x-2">
+<div class="w-6 h-6 rounded-full bg-blue-500 border-2 border-white flex items-center justify-center text-[8px] text-white font-bold">L</div>
+<div class="w-6 h-6 rounded-full bg-purple-500 border-2 border-white flex items-center justify-center text-[8px] text-white font-bold">J</div>
+<div class="w-6 h-6 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center text-[8px] text-white font-bold">+3</div>
+</div>
+</div>
+<!-- Editor / Preview Split -->
+<div class="flex h-64">
+<!-- Left: Editor (Dark Mode) -->
+<div class="w-1/2 bg-[#282C34] p-4 font-mono text-xs text-gray-400 relative overflow-hidden border-r border-gray-600">
+<!-- Line Numbers -->
+<div class="absolute left-0 top-4 bottom-0 w-8 text-right pr-2 text-gray-600 select-none">
+                            1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8
+                        </div>
+<div class="pl-8 leading-relaxed">
+<p><span class="text-[#61AFEF] font-bold">#</span> <span class="text-gray-200 font-bold">Titan_X Test Summary</span></p>
+<p class="mt-2"><span class="text-[#61AFEF] font-bold">##</span> <span class="text-gray-200 font-bold">Issue Tracking</span></p>
+<p class="mt-1"><span class="text-[#E06C75]">- [ ]</span> <span class="text-gray-300">Memory leak in module A</span></p>
+<p class=""><span class="text-[#98C379]">- [x]</span> <span class="text-gray-300">Voltage check pass</span></p>
+<p class="mt-2"><span class="text-[#C678DD]">```cpp</span></p>
+<p><span class="text-[#E5C07B]">int</span> main() {</p>
+<p>  Test_Start(); <span class="text-[#5C6370] italic">// TODO: verify timing</span></p>
+<p><span class="text-[#C678DD]">```</span></p>
+</div>
+<!-- Cursor Simulation (User: Lai) -->
+<div class="absolute top-28 left-40 text-[#17A2B8]">
+<div class="cursor-line"></div>
+<div class="cursor-tag bg-[#17A2B8]">Lai (You)</div>
+</div>
+</div>
+<!-- Right: Preview (Light Mode) -->
+<div class="w-1/2 bg-white p-6 overflow-hidden relative">
+<div class="prose prose-sm max-w-none">
+<h1 class="text-2xl font-bold text-gray-800 border-b pb-2 mb-3">Titan_X Test Summary</h1>
+<h2 class="text-lg font-bold text-gray-700 mt-2 mb-2">Issue Tracking</h2>
+<ul class="list-none pl-0 space-y-1 text-sm text-gray-600">
+<li class="flex items-center"><i class="far fa-square text-gray-400 mr-2"></i> Memory leak in module A</li>
+<li class="flex items-center"><i class="far fa-check-square text-[#17A2B8] mr-2"></i> Voltage check pass</li>
+</ul>
+<!-- Code block preview -->
+<div class="bg-gray-50 border border-gray-200 rounded p-2 mt-3 font-mono text-xs text-gray-700 relative">
+<span class="text-purple-600">int</span> main() {<br/>
+                                  Test_Start(); <span class="text-gray-400 italic">// TODO: verify timing</span><br/>
+                                }
+                                <!-- Cursor Simulation (User: Jason) -->
+<div class="absolute top-6 right-10 text-purple-500">
+<div class="cursor-line"></div>
+<div class="cursor-tag bg-purple-500">Jason</div>
+</div>
+</div>
+</div>
+<!-- Publish Button Float -->
+<div class="absolute top-4 right-4">
+<div class="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-blue-100 flex items-center gap-1">
+<i class="fas fa-globe"></i> Published
+                            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Workflow Steps (Bottom) -->
+<div class="w-full max-w-6xl mt-auto mb-4">
+<div class="flex justify-between items-start relative">
+<!-- Step 1 -->
+<div class="flex flex-col items-center flex-1 z-10">
+<div class="w-14 h-14 bg-white border-2 border-gray-200 rounded-2xl flex items-center justify-center shadow-md mb-3 text-gray-600">
+<i class="fas fa-robot text-2xl"></i>
+</div>
+<h3 class="font-bold text-gray-700 text-sm">1. 小旺生成</h3>
+<p class="text-xs text-gray-400 mt-1 text-center">對話完成後<br/>點擊「整串匯出」</p>
+</div>
+<!-- Connector -->
+<div class="step-connector mt-7"></div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center flex-1 z-10">
+<div class="w-14 h-14 bg-white border-2 border-[#17A2B8] rounded-2xl flex items-center justify-center shadow-md mb-3 text-[#17A2B8]">
+<i class="fas fa-paste text-2xl"></i>
+</div>
+<h3 class="font-bold text-[#17A2B8] text-sm">2. 貼上 HedgeDoc</h3>
+<p class="text-xs text-gray-400 mt-1 text-center">Markdown 格式<br/>完美相容</p>
+</div>
+<!-- Connector -->
+<div class="step-connector mt-7"></div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center flex-1 z-10">
+<div class="w-14 h-14 bg-white border-2 border-gray-200 rounded-2xl flex items-center justify-center shadow-md mb-3 text-gray-600">
+<i class="fas fa-users-cog text-2xl"></i>
+</div>
+<h3 class="font-bold text-gray-700 text-sm">3. 協作修訂</h3>
+<p class="text-xs text-gray-400 mt-1 text-center">邀請 TE/SE<br/>共同確認內容</p>
+</div>
+<!-- Connector -->
+<div class="step-connector mt-7"></div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center flex-1 z-10">
+<div class="w-14 h-14 bg-white border-2 border-green-500 rounded-2xl flex items-center justify-center shadow-md mb-3 text-green-500">
+<i class="fas fa-share-alt text-2xl"></i>
+</div>
+<h3 class="font-bold text-gray-700 text-sm">4. 發布分享</h3>
+<p class="text-xs text-gray-400 mt-1 text-center">生成唯讀連結<br/>跨部門報告</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-16 py-6 flex justify-between items-center text-gray-400 text-xs font-mono relative z-10">
+<p>AI 輔助開發基礎課程 (2026)</p>
+<p>Page 07</p>
+</div>
+</div>
+</body>
+</html>

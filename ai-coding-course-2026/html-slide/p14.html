@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>系統提示詞的關鍵作用</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .bg-dots {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23E9ECEF'/%3E%3C/svg%3E");
+        }
+        /* Custom Shadow for Floating Elements */
+        .float-shadow {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .code-block {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #282C34;
+            color: #ABB2BF;
+        }
+        .highlight-line {
+            background-color: rgba(23, 162, 184, 0.2);
+            border-left: 3px solid #17A2B8;
+        }
+        /* Glow Effect for AI Icon */
+        .glow-icon {
+            box-shadow: 0 0 15px rgba(23, 162, 184, 0.5);
+        }
+        /* Card Hover Effect */
+        .feature-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-dots">
+<!-- Background Decor -->
+<div class="absolute bottom-0 left-0 w-[30%] h-[40%] bg-gray-50 rounded-tr-full -z-0"></div>
+<!-- Header Section -->
+<div class="px-16 pt-10 pb-4 flex justify-between items-end relative z-10">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-gray-800 text-white text-xs font-bold rounded uppercase tracking-wider">System Control</span>
+<span class="h-px w-8 bg-gray-300"></span>
+</div>
+<h1 class="text-4xl font-black text-gray-800 tracking-tight">系統提示詞 (System Prompt)</h1>
+<p class="text-xl text-gray-500 mt-2 font-light">AI 的靈魂設定：<span class="border-b-2 border-[#17A2B8] text-gray-600">定義對話的全域規則</span></p>
+</div>
+<!-- Top Right Icon -->
+<div class="opacity-100">
+<div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200">
+<i class="fas fa-sliders-h text-[#17A2B8] text-xs"></i>
+<p class="text-xs font-mono text-gray-500">Global Config</p>
+</div>
+</div>
+</div>
+<!-- Main Content -->
+<div class="flex-1 px-16 py-6 flex gap-12 relative z-10 items-center">
+<!-- Left Panel: Key Concepts List -->
+<div class="w-5/12 flex flex-col gap-5">
+<!-- Concept 1: Global Setting -->
+<div class="feature-card bg-white p-6 rounded-xl border-l-4 border-[#0056B3] shadow-sm">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0 text-[#0056B3]">
+<i class="fas fa-globe text-lg"></i>
+</div>
+<div>
+<h3 class="font-bold text-gray-800 text-lg mb-1">全域行為準則</h3>
+<p class="text-sm text-gray-600 leading-relaxed">
+                                System Prompt 擁有最高的權重，就像是角色的「人設」與「底線」。它會持續影響整場對話的語氣、邏輯與輸出格式，不需要每次提問都重複一遍。
+                            </p>
+</div>
+</div>
+</div>
+<!-- Concept 2: Hallucination Constraint -->
+<div class="feature-card bg-white p-6 rounded-xl border-l-4 border-[#17A2B8] shadow-sm">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-cyan-50 flex items-center justify-center flex-shrink-0 text-[#17A2B8]">
+<i class="fas fa-shield-alt text-lg"></i>
+</div>
+<div>
+<h3 class="font-bold text-gray-800 text-lg mb-1">ATL 專用規範 (防幻覺)</h3>
+<p class="text-sm text-gray-600 leading-relaxed">
+                                針對封閉性語言 (如 ATL)，必須在系統層級強制設定 <span class="bg-gray-100 px-1 rounded text-gray-800 font-bold text-xs">No Hallucination</span> 規則，並要求 AI 僅能使用提供的 Few-Shot 範例，嚴禁 "Guessing"。
+                            </p>
+</div>
+</div>
+</div>
+<!-- Concept 3: Templates -->
+<div class="feature-card bg-white p-6 rounded-xl border-l-4 border-gray-500 shadow-sm">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 text-gray-600">
+<i class="fas fa-copy text-lg"></i>
+</div>
+<div>
+<h3 class="font-bold text-gray-800 text-lg mb-1">常用範本庫</h3>
+<p class="text-sm text-gray-600 leading-relaxed">
+                                建立團隊通用的 Prompt 範本，例如：<br/>
+<span class="inline-block mt-1 text-xs bg-gray-100 px-2 py-1 rounded border border-gray-200 text-gray-500">ATE Code Reviewer</span>
+<span class="inline-block mt-1 text-xs bg-gray-100 px-2 py-1 rounded border border-gray-200 text-gray-500">Legacy C++ Refactor</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Visual Representation (UI + Code) -->
+<div class="w-7/12 relative">
+<!-- AI Assistant UI Mockup -->
+<div class="absolute -top-10 -left-10 w-full h-full border-2 border-dashed border-gray-200 rounded-3xl -z-10"></div>
+<div class="bg-white rounded-2xl float-shadow overflow-hidden border border-gray-200 relative">
+<!-- UI Header -->
+<div class="bg-white px-5 py-3 border-b border-gray-100 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-white text-xs glow-icon">
+<i class="fas fa-robot"></i>
+</div>
+<div>
+<h4 class="font-bold text-gray-800 text-sm">AI 小旺 Settings</h4>
+<p class="text-[10px] text-gray-400">System Prompt Configuration</p>
+</div>
+</div>
+<div class="text-[#17A2B8]">
+<i class="fas fa-lightbulb animate-pulse"></i>
+</div>
+</div>
+<!-- Code Editor View -->
+<div class="code-block p-6 text-xs leading-relaxed overflow-hidden relative">
+<!-- Line Numbers -->
+<div class="absolute left-0 top-6 bottom-0 w-8 text-right pr-3 text-gray-600 select-none border-r border-gray-700 bg-[#282C34]">
+                            1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11
+                        </div>
+<div class="pl-6 font-mono">
+<p><span class="text-[#C678DD]">You are</span> an expert Test Engineer for Advantest V93k.</p>
+<p class="mt-2 text-[#5C6370] italic">// Core Responsibility</p>
+<p><span class="text-[#C678DD]">Your task is</span> to convert datasheet specs into C++98 test methods.</p>
+<p class="mt-2 text-[#5C6370] italic">// CRITICAL RULES (Safety First)</p>
+<div class="highlight-line pl-2 -ml-2 py-1 my-1 rounded-r">
+<p><span class="text-[#E06C75] font-bold">1. DO NOT fabricate APIs.</span> Only use standard C++ or provided examples.</p>
+</div>
+<div class="highlight-line pl-2 -ml-2 py-1 my-1 rounded-r">
+<p><span class="text-[#E06C75] font-bold">2. SAFETY CHECK:</span> Always add <span class="text-[#98C379]">`LimitCheck()`</span> before <span class="text-[#98C379]">`ForceVoltage()`</span>.</p>
+</div>
+<p class="mt-2 text-[#5C6370] italic">// Output Format</p>
+<p><span class="text-[#C678DD]">Always</span> wrap code in triple backticks with language tags.</p>
+</div>
+</div>
+<!-- Bottom Status Bar -->
+<div class="bg-gray-50 px-5 py-2 border-t border-gray-100 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<span class="text-[10px] text-gray-500 font-bold uppercase">Active</span>
+</div>
+<span class="text-[10px] text-gray-400 font-mono">248 tokens</span>
+</div>
+</div>
+<!-- Callout Box -->
+<div class="absolute -bottom-6 -right-4 bg-[#17A2B8] text-white p-4 rounded-xl shadow-lg w-64 transform rotate-2 border-2 border-white">
+<div class="flex items-start gap-3">
+<i class="fas fa-comment-dots text-xl mt-1 opacity-80"></i>
+<div>
+<p class="font-bold text-sm">Pro Tip:</p>
+<p class="text-xs opacity-90 leading-snug mt-1">把「不准捏造 API」寫在第一行，AI 遵守的機率最高。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-16 py-6 flex justify-between items-center text-gray-400 text-xs font-mono relative z-10">
+<p>AI 輔助開發基礎課程 (2026)</p>
+<p>Page 14</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Markdown 基礎語法速成</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .tech-accent {
+            color: #17A2B8;
+        }
+        .bg-tech-accent {
+            background-color: #17A2B8;
+        }
+        .border-tech-accent {
+            border-color: #17A2B8;
+        }
+        .bg-dots {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23E9ECEF'/%3E%3C/svg%3E");
+        }
+        .mono-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Syntax Highlighting Simulation */
+        .token-keyword { color: #d73a49; } /* red */
+        .token-string { color: #032f62; } /* dark blue */
+        .token-comment { color: #6a737d; font-style: italic; } /* gray */
+        .token-function { color: #6f42c1; } /* purple */
+        .token-md-heading { color: #005cc5; font-weight: bold; } /* blue */
+        .token-md-bold { color: #24292e; font-weight: bold; }
+        .token-md-code { color: #e36209; } /* orange */
+        
+        /* Shadow for windows */
+        .window-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-dots">
+<!-- Background Elements -->
+<div class="absolute top-0 right-0 w-[20%] h-full bg-slate-50 border-l border-gray-100 -z-0"></div>
+<!-- Header Section -->
+<div class="px-16 pt-10 pb-4 flex justify-between items-end relative z-10">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded uppercase tracking-wider">Basic Tools</span>
+<span class="h-px w-8 bg-gray-300"></span>
+</div>
+<h1 class="text-4xl font-black text-gray-800 tracking-tight">Markdown 基礎語法速成</h1>
+<p class="text-xl text-gray-500 mt-2 font-light">工程師必備的標記語言：<span class="border-b-2 border-[#17A2B8] text-gray-600">從源碼到渲染</span></p>
+</div>
+<!-- Top Right Icon -->
+<div class="opacity-100">
+<div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200">
+<i class="fab fa-markdown text-gray-700 text-xl"></i>
+<p class="text-xs font-mono text-gray-500">Universal Format</p>
+</div>
+</div>
+</div>
+<!-- Main Content: Split View -->
+<div class="flex-1 flex px-16 py-6 relative z-10 gap-8 items-stretch mb-8">
+<!-- Left Panel: Source Code (Editor) -->
+<div class="flex-1 flex flex-col window-shadow rounded-xl overflow-hidden border border-gray-200 bg-white">
+<!-- Editor Header -->
+<div class="bg-gray-100 px-4 py-2 flex items-center justify-between border-b border-gray-200">
+<div class="flex space-x-2">
+<div class="w-3 h-3 rounded-full bg-red-400"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+<div class="w-3 h-3 rounded-full bg-green-400"></div>
+</div>
+<div class="text-xs font-mono text-gray-500 flex items-center">
+<i class="far fa-file-code mr-2"></i> source.md
+                    </div>
+<div class="w-8"></div> <!-- Spacer -->
+</div>
+<!-- Editor Content -->
+<div class="flex-1 bg-[#F1F3F5] p-6 mono-font text-sm overflow-hidden relative leading-loose">
+<!-- Line Numbers -->
+<div class="absolute left-0 top-6 bottom-0 w-10 text-right pr-3 text-gray-300 select-none border-r border-gray-200 bg-[#F1F3F5]">
+                        1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12
+                    </div>
+<!-- Code -->
+<div class="pl-6 text-gray-700">
+<p><span class="token-md-heading"># 測試報告摘要</span></p>
+<p><span class="token-md-heading">## 核心數據</span></p>
+<p>本次測試結果包含以下項目：</p>
+<p><span class="token-keyword">-</span> <span class="token-md-bold">**良率 (Yield)**</span>: 98.5%</p>
+<p><span class="token-keyword">-</span> <span class="token-md-bold">**測試時間**</span>: `245ms`</p>
+<p><br/></p>
+<p><span class="token-comment">```cpp</span></p>
+<p><span class="token-keyword">void</span> <span class="token-function">CheckVoltage</span>() {</p>
+<p>  <span class="token-comment">// Limit Check</span></p>
+<p>  <span class="token-keyword">if</span> (v &gt; <span class="token-string">3.3</span>) <span class="token-keyword">return</span> false;</p>
+<p>}</p>
+<p><span class="token-comment">```</span></p>
+</div>
+</div>
+</div>
+<!-- Arrow Indicator -->
+<div class="flex flex-col justify-center items-center w-12 text-[#17A2B8]">
+<div class="w-full h-px bg-gray-200 mb-2"></div>
+<div class="w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center border border-gray-100 animate-pulse">
+<i class="fas fa-arrow-right"></i>
+</div>
+<p class="text-[10px] font-bold mt-2 uppercase tracking-wide text-gray-400">Render</p>
+<div class="w-full h-px bg-gray-200 mt-2"></div>
+</div>
+<!-- Right Panel: Rendered View (Preview) -->
+<div class="flex-1 flex flex-col window-shadow rounded-xl overflow-hidden border border-gray-200 bg-white">
+<!-- Preview Header -->
+<div class="bg-white px-4 py-2 flex items-center justify-between border-b border-gray-100">
+<div class="flex space-x-1 opacity-50">
+<div class="w-1 h-1 rounded-full bg-gray-400"></div>
+<div class="w-1 h-1 rounded-full bg-gray-400"></div>
+<div class="w-1 h-1 rounded-full bg-gray-400"></div>
+</div>
+<div class="text-xs font-sans font-bold text-[#17A2B8] uppercase tracking-widest">
+                        Preview
+                    </div>
+<div class="w-8"></div> <!-- Spacer -->
+</div>
+<!-- Preview Content -->
+<div class="flex-1 bg-white p-8 overflow-hidden relative">
+<!-- Rendered HTML Simulation -->
+<div class="prose prose-sm max-w-none">
+<h1 class="text-2xl font-bold text-gray-900 mb-2 pb-2 border-b border-gray-100">測試報告摘要</h1>
+<h2 class="text-lg font-bold text-gray-800 mb-3 mt-4">核心數據</h2>
+<p class="text-gray-600 mb-3 text-sm">本次測試結果包含以下項目：</p>
+<ul class="list-disc pl-5 space-y-2 mb-4 text-sm text-gray-600">
+<li><strong>良率 (Yield)</strong>: 98.5%</li>
+<li><strong>測試時間</strong>: <code class="bg-gray-100 px-1 py-0.5 rounded text-red-500 font-mono text-xs">245ms</code></li>
+</ul>
+<!-- Code Block Render -->
+<div class="bg-[#282C34] rounded-lg p-3 text-xs mt-4 shadow-inner relative group">
+<div class="absolute right-2 top-2 text-gray-500 text-[10px] uppercase">cpp</div>
+<pre class="font-mono text-gray-200 m-0 overflow-x-auto">
+<span class="text-[#C678DD]">void</span> <span class="text-[#61AFEF]">CheckVoltage</span>() {
+  <span class="text-[#5C6370] italic">// Limit Check</span>
+  <span class="text-[#C678DD]">if</span> (v &gt; <span class="text-[#D19A66]">3.3</span>) <span class="text-[#C678DD]">return</span> <span class="text-[#D19A66]">false</span>;
+}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Mermaid Feature Callout (Bottom Right) -->
+<div class="absolute bottom-20 right-16 z-20">
+<div class="bg-white pl-2 pr-4 py-2 rounded-lg shadow-lg border border-gray-100 flex items-center gap-3 transform rotate-2 hover:rotate-0 transition-transform cursor-pointer">
+<div class="w-8 h-8 bg-purple-100 rounded flex items-center justify-center text-purple-600">
+<i class="fas fa-project-diagram"></i>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 font-bold uppercase">Pro Tip</p>
+<p class="text-xs font-bold text-gray-700">支援 Mermaid 流程圖</p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-16 py-6 flex justify-between items-center text-gray-400 text-xs font-mono relative z-10">
+<p>AI 輔助開發基礎課程 (2026)</p>
+<p>Page 06</p>
+</div>
+</div>
+</body>
+</html>

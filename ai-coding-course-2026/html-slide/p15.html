@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>進階技巧：SDD 與 TDD</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .tech-accent {
+            color: #17A2B8;
+        }
+        .bg-tech-accent {
+            background-color: #17A2B8;
+        }
+        .border-tech-accent {
+            border-color: #17A2B8;
+        }
+        .bg-dots {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23E9ECEF'/%3E%3C/svg%3E");
+        }
+        .arrow-right {
+            position: relative;
+        }
+        .arrow-right::after {
+            content: '\f061';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            right: -24px;
+            transform: translateY(-50%);
+            color: #CBD5E1;
+            font-size: 1.5rem;
+        }
+        /* Custom Code Block Styling */
+        .code-snippet {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+        .step-card {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-dots">
+<!-- Background Elements -->
+<div class="absolute top-0 right-0 w-[30%] h-full bg-slate-50 border-l border-gray-100 -z-0"></div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-[#17A2B8]"></div>
+<!-- Header Section -->
+<div class="px-16 pt-12 pb-4 flex justify-between items-end relative z-10">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded uppercase tracking-wider border border-blue-100">Advanced Skills</span>
+<span class="h-px w-8 bg-gray-300"></span>
+</div>
+<h1 class="text-4xl font-black text-gray-800 tracking-tight">規格驅動與測試驅動開發</h1>
+<p class="text-xl text-gray-500 mt-2 font-light">對抗幻覺的最佳防禦：<span class="border-b-2 border-[#17A2B8] text-gray-600">SDD 與 TDD</span></p>
+</div>
+<!-- Top Right Icon -->
+<div class="opacity-100">
+<div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200">
+<i class="fas fa-code-branch text-[#17A2B8] text-xs"></i>
+<p class="text-xs font-mono text-gray-500">Workflow Optimization</p>
+</div>
+</div>
+</div>
+<!-- Main Content: Development Pipeline -->
+<div class="flex-1 flex flex-col px-16 py-6 relative z-10 justify-start">
+<!-- Pipeline Visualization -->
+<div class="w-full bg-white rounded-2xl border border-gray-200 p-8 shadow-sm mb-8 relative overflow-hidden">
+<!-- Connecting Line Background -->
+<div class="absolute top-1/2 left-10 right-10 h-1 bg-gray-100 -translate-y-1/2 z-0"></div>
+<div class="relative z-10 flex justify-between items-stretch gap-4">
+<!-- Step 1: Interview -->
+<div class="flex-1 flex flex-col items-center group step-card">
+<div class="w-16 h-16 rounded-full bg-gray-50 border-4 border-white shadow-md flex items-center justify-center mb-4 group-hover:border-gray-200 transition-colors relative">
+<i class="fas fa-comments text-gray-400 text-xl group-hover:text-gray-600"></i>
+<div class="absolute -right-8 top-1/2 -translate-y-1/2 text-gray-300 text-xl"><i class="fas fa-angle-right"></i></div>
+</div>
+<div class="text-center bg-white p-3 rounded-lg border border-gray-100 shadow-sm w-full">
+<h3 class="font-bold text-gray-700">1. 訪談 (Interview)</h3>
+<p class="text-xs text-gray-500 mt-1">釐清模糊需求</p>
+</div>
+</div>
+<!-- Step 2: Spec (SDD) -->
+<div class="flex-1 flex flex-col items-center group step-card">
+<div class="w-16 h-16 rounded-full bg-blue-50 border-4 border-white shadow-md flex items-center justify-center mb-4 group-hover:border-blue-100 transition-colors relative">
+<i class="fas fa-file-contract text-[#17A2B8] text-xl"></i>
+<div class="absolute -top-2 -right-2 bg-[#17A2B8] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">SDD</div>
+<div class="absolute -right-8 top-1/2 -translate-y-1/2 text-gray-300 text-xl"><i class="fas fa-angle-right"></i></div>
+</div>
+<div class="text-center bg-white p-3 rounded-lg border border-blue-100 shadow-sm w-full relative">
+<h3 class="font-bold text-gray-800">2. 規格生成 (Spec)</h3>
+<p class="text-xs text-gray-500 mt-1">Markdown 文件化</p>
+</div>
+</div>
+<!-- Step 3: Test (TDD) -->
+<div class="flex-1 flex flex-col items-center group step-card">
+<div class="w-16 h-16 rounded-full bg-purple-50 border-4 border-white shadow-md flex items-center justify-center mb-4 group-hover:border-purple-100 transition-colors relative">
+<i class="fas fa-vials text-purple-500 text-xl"></i>
+<div class="absolute -top-2 -right-2 bg-purple-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">TDD</div>
+<div class="absolute -right-8 top-1/2 -translate-y-1/2 text-gray-300 text-xl"><i class="fas fa-angle-right"></i></div>
+</div>
+<div class="text-center bg-white p-3 rounded-lg border border-purple-100 shadow-sm w-full">
+<h3 class="font-bold text-gray-800">3. 測試生成 (Test)</h3>
+<p class="text-xs text-gray-500 mt-1">建立驗證標準</p>
+</div>
+</div>
+<!-- Step 4: Code -->
+<div class="flex-1 flex flex-col items-center group step-card">
+<div class="w-16 h-16 rounded-full bg-green-50 border-4 border-white shadow-md flex items-center justify-center mb-4 group-hover:border-green-100 transition-colors">
+<i class="fas fa-code text-green-500 text-xl"></i>
+</div>
+<div class="text-center bg-white p-3 rounded-lg border border-green-100 shadow-sm w-full">
+<h3 class="font-bold text-gray-800">4. 代碼實作 (Code)</h3>
+<p class="text-xs text-gray-500 mt-1">通過測試的產出</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Key Concepts (3 Columns) -->
+<div class="grid grid-cols-3 gap-8 flex-1">
+<!-- Card 1: SDD Details -->
+<div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-[#17A2B8]">
+<i class="fas fa-file-signature text-lg"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800">SDD (規格驅動)</h3>
+</div>
+<p class="text-sm text-gray-500 leading-relaxed mb-4 flex-1">
+                        不要直接叫 AI 寫 Code。先讓它幫你整理 Datasheet 規格或邏輯，確認無誤後，再以此為基礎生成代碼。
+                    </p>
+<div class="bg-blue-50/50 p-3 rounded border border-blue-100">
+<p class="text-xs text-[#17A2B8] font-bold mb-1"><i class="fas fa-lightbulb mr-1"></i> Prompt 技巧</p>
+<p class="code-snippet text-gray-600">"請先根據這份 Datasheet 產生 Markdown 格式的規格書..."</p>
+</div>
+</div>
+<!-- Card 2: TDD Details -->
+<div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center text-purple-500">
+<i class="fas fa-tasks text-lg"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800">TDD (測試驅動)</h3>
+</div>
+<p class="text-sm text-gray-500 leading-relaxed mb-4 flex-1">
+                        針對純邏輯運算 (如 BBM 演算法)，先寫單元測試 (Unit Test)。如果 AI 的代碼跑不過測試，就代表有幻覺。
+                    </p>
+<div class="bg-purple-50/50 p-3 rounded border border-purple-100">
+<p class="text-xs text-purple-600 font-bold mb-1"><i class="fas fa-check-double mr-1"></i> 驗證核心</p>
+<p class="code-snippet text-gray-600">assert(calc_crc(0x12) == 0xAB); // Fail = Reject</p>
+</div>
+</div>
+<!-- Card 3: Why it works -->
+<div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center text-green-500">
+<i class="fas fa-shield-virus text-lg"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800">幻覺防禦效益</h3>
+</div>
+<ul class="space-y-3 flex-1">
+<li class="flex items-start gap-3">
+<i class="fas fa-check-circle text-green-500 mt-1 text-sm"></i>
+<div>
+<p class="text-sm font-bold text-gray-700">降低不確定性</p>
+<p class="text-xs text-gray-500">規格書限制了 AI 的想像空間。</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<i class="fas fa-check-circle text-green-500 mt-1 text-sm"></i>
+<div>
+<p class="text-sm font-bold text-gray-700">自動抓錯</p>
+<p class="text-xs text-gray-500">測試用例能自動攔截錯誤邏輯。</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-16 py-6 flex justify-between items-center text-gray-400 text-xs font-mono relative z-10">
+<p>AI 輔助開發基礎課程 (2026)</p>
+<p>Page 15</p>
+</div>
+</div>
+</body>
+</html>

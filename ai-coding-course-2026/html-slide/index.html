@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AI 輔助開發基礎課程 (2026) - 簡報索引</title>
+    <script>
+        const originalWarn = console.warn;
+        console.warn = function(...args) {
+            if (args[0] && typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
+            originalWarn.apply(console, args);
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .slide-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            background: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+        .slide-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #17A2B8;
+        }
+        .slide-iframe-wrapper {
+            width: 1280px;
+            height: 720px;
+            transform-origin: top left;
+            pointer-events: none;
+            background-color: white;
+        }
+        .slide-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            background: transparent;
+        }
+        .slide-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 20;
+            pointer-events: none;
+        }
+        .slide-card:hover .slide-info {
+            opacity: 1;
+        }
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 3rem;
+            height: 3rem;
+            background: rgba(23, 162, 184, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 20;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .slide-card:hover .play-icon {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-[#17A2B8]">
+                    <i class="fas fa-robot text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-black text-gray-800 tracking-tight">AI 輔助開發基礎課程 (2026)</h1>
+                    <p class="text-xs text-gray-500 font-mono">SLIDE DECK INDEX</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="text-right mr-4 hidden md:block">
+                    <p class="text-xs text-gray-400 font-bold uppercase tracking-wider">Total Slides</p>
+                    <p class="text-lg font-bold text-gray-700">19 Pages</p>
+                </div>
+                <button onclick="openPresentation(1)" class="bg-[#17A2B8] hover:bg-[#138496] text-white px-6 py-2.5 rounded-full font-bold shadow-lg shadow-cyan-500/30 flex items-center gap-2 transition-all hover:scale-105 active:scale-95">
+                    <i class="fas fa-play text-sm"></i>
+                    <span>Start Presentation</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Grid -->
+    <main class="flex-1 bg-gray-50 p-8">
+        <div class="max-w-[1600px] mx-auto">
+            <div id="grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Cards injected by JS -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-6 text-center">
+        <p class="text-sm text-gray-400 font-mono">© 2026 Internal Training Material. Confidential.</p>
+    </footer>
+
+    <!-- Presentation Modal -->
+    <div id="presentation-mode" class="fixed inset-0 z-[100] bg-black hidden transition-opacity duration-300">
+        <iframe id="main-frame" class="w-full h-full border-none bg-white"></iframe>
+        
+        <!-- Controls -->
+        <div class="absolute bottom-8 right-8 flex gap-4 z-50">
+            <button id="btn-prev" onclick="changeSlide(-1)" class="bg-gray-800/80 hover:bg-gray-700 text-white px-6 py-3 rounded-full backdrop-blur-sm transition-all flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed shadow-lg border border-gray-700">
+                <i class="fas fa-chevron-left"></i> Prev
+            </button>
+            <button id="btn-next" onclick="changeSlide(1)" class="bg-[#17A2B8]/90 hover:bg-[#138496] text-white px-6 py-3 rounded-full backdrop-blur-sm transition-all flex items-center gap-2 shadow-lg shadow-cyan-500/30 disabled:opacity-30 disabled:cursor-not-allowed border border-cyan-400/30">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Close Button -->
+        <button onclick="closePresentation()" class="absolute top-6 right-6 bg-gray-800/50 hover:bg-red-500/80 text-white w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-sm transition-all z-50 shadow-lg">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+    </div>
+
+    <script>
+        const totalSlides = 19;
+        const container = document.getElementById('grid-container');
+
+        function renderGrid() {
+            for (let i = 1; i <= totalSlides; i++) {
+                const pageNum = i.toString().padStart(2, '0');
+                const fileName = `p${pageNum}.html`;
+                const card = document.createElement('div');
+                card.className = 'slide-card group';
+                card.innerHTML = `
+                    <div class="slide-iframe-wrapper">
+                        <iframe src="${fileName}" class="slide-iframe" loading="lazy" scrolling="no"></iframe>
+                    </div>
+                    <div class="slide-info">
+                        <p class="font-bold text-lg">Page ${pageNum}</p>
+                        <p class="text-xs opacity-80 font-mono">${fileName}</p>
+                    </div>
+                    <div class="play-icon cursor-pointer" onclick="openPresentation(${i})"><i class="fas fa-expand"></i></div>
+                    <div class="slide-overlay cursor-pointer" onclick="openPresentation(${i})" aria-label="Go to slide ${i}"></div>
+                `;
+                container.appendChild(card);
+            }
+            resizeThumbnails();
+        }
+
+        function resizeThumbnails() {
+            const wrappers = document.querySelectorAll('.slide-iframe-wrapper');
+            wrappers.forEach(wrapper => {
+                const cardWidth = wrapper.parentElement.offsetWidth;
+                const scale = cardWidth / 1280;
+                wrapper.style.transform = `scale(${scale})`;
+                wrapper.parentElement.style.height = `${720 * scale}px`;
+            });
+        }
+
+        renderGrid();
+        window.addEventListener('resize', resizeThumbnails);
+        window.addEventListener('load', resizeThumbnails);
+
+        // Presentation Logic
+        let currentSlideIndex = 1;
+
+        function openPresentation(index) {
+            currentSlideIndex = index;
+            const modal = document.getElementById('presentation-mode');
+            modal.classList.remove('hidden');
+            updateSlide();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePresentation() {
+            const modal = document.getElementById('presentation-mode');
+            const frame = document.getElementById('main-frame');
+            modal.classList.add('hidden');
+            frame.src = ''; 
+            document.body.style.overflow = '';
+        }
+
+        function changeSlide(offset) {
+            const newIndex = currentSlideIndex + offset;
+            if (newIndex >= 1 && newIndex <= totalSlides) {
+                currentSlideIndex = newIndex;
+                updateSlide();
+            }
+        }
+
+        function updateSlide() {
+            const frame = document.getElementById('main-frame');
+            const pageNum = currentSlideIndex.toString().padStart(2, '0');
+            frame.src = `p${pageNum}.html`;
+            
+            document.getElementById('btn-prev').disabled = currentSlideIndex === 1;
+            document.getElementById('btn-next').disabled = currentSlideIndex === totalSlides;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('presentation-mode').classList.contains('hidden')) return;
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+            if (e.key === 'Escape') closePresentation();
+        });
+    </script>
+</body>
+</html>

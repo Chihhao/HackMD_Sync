@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>優質 Prompt 公式</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .bg-dots {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23E9ECEF'/%3E%3C/svg%3E");
+        }
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        .card-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .formula-operator {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            color: #ADB5BD;
+            font-weight: 700;
+        }
+        .tech-blue { color: #0056B3; }
+        .tech-cyan { color: #17A2B8; }
+        
+        /* Module specific borders */
+        .border-role { border-top: 4px solid #0056B3; }
+        .border-context { border-top: 4px solid #17A2B8; }
+        .border-constraints { border-top: 4px solid #DC3545; }
+        .border-format { border-top: 4px solid #6F42C1; }
+        .border-result { border: 2px solid #17A2B8; }
+        
+        .code-tag {
+            background-color: #F8F9FA;
+            border: 1px solid #E9ECEF;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-dots">
+<!-- Background Decor -->
+<div class="absolute top-0 right-0 w-[15%] h-full bg-slate-50 border-l border-gray-100 -z-0"></div>
+<!-- Header Section -->
+<div class="px-16 pt-10 pb-4 flex justify-between items-end relative z-10">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded uppercase tracking-wider border border-blue-100">Prompt Engineering</span>
+<span class="h-px w-8 bg-gray-300"></span>
+</div>
+<h1 class="text-4xl font-black text-gray-800 tracking-tight">優質 Prompt 公式</h1>
+<p class="text-xl text-gray-500 mt-2 font-light">Garbage In, Garbage Out：<span class="border-b-2 border-[#17A2B8] text-gray-600">結構化你的指令</span></p>
+</div>
+<!-- Top Right Icon -->
+<div class="opacity-100">
+<div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200">
+<i class="fas fa-flask text-[#17A2B8] text-xs"></i>
+<p class="text-xs font-mono text-gray-500">The Formula</p>
+</div>
+</div>
+</div>
+<!-- Main Content: The Formula -->
+<div class="flex-1 flex flex-col justify-center items-center px-10 relative z-10">
+<!-- Formula Row -->
+<div class="flex items-center justify-between w-full max-w-6xl gap-2">
+<!-- 1. Role (角色) -->
+<div class="flex-1 bg-white rounded-xl p-5 card-shadow border-role h-72 flex flex-col">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-[#0056B3]">
+<i class="fas fa-user-tie text-xl"></i>
+</div>
+<div>
+<h3 class="font-bold text-gray-800 text-lg">Role</h3>
+<p class="text-xs text-gray-400 font-mono">WHO are you?</p>
+</div>
+</div>
+<p class="text-sm text-gray-600 mb-3 flex-grow">賦予 AI 專家身分，喚醒特定領域的知識權重。</p>
+<div class="space-y-2">
+<p class="flex items-center gap-2 text-xs text-gray-500">
+<i class="fas fa-check text-green-500"></i>
+<span class="code-tag">Senior TE</span>
+</p>
+<p class="flex items-center gap-2 text-xs text-gray-500">
+<i class="fas fa-check text-green-500"></i>
+<span class="code-tag">Flash Expert</span>
+</p>
+</div>
+</div>
+<!-- Operator + -->
+<div class="formula-operator">+</div>
+<!-- 2. Context (背景) -->
+<div class="flex-1 bg-white rounded-xl p-5 card-shadow border-context h-72 flex flex-col">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-cyan-50 flex items-center justify-center text-[#17A2B8]">
+<i class="fas fa-map-signs text-xl"></i>
+</div>
+<div>
+<h3 class="font-bold text-gray-800 text-lg">Context</h3>
+<p class="text-xs text-gray-400 font-mono">WHAT is the situation?</p>
+</div>
+</div>
+<p class="text-sm text-gray-600 mb-3 flex-grow">提供完整的前因後果、目標與環境資訊。</p>
+<div class="space-y-2">
+<p class="flex items-center gap-2 text-xs text-gray-500">
+<i class="fas fa-microchip text-gray-400"></i>
+<span>Advantest V93k</span>
+</p>
+<p class="flex items-center gap-2 text-xs text-gray-500">
+<i class="fas fa-bullseye text-gray-400"></i>
+<span>Analyze Yield Loss</span>
+</p>
+</div>
+</div>
+<!-- Operator + -->
+<div class="formula-operator">+</div>
+<!-- 3. Constraints (限制) -->
+<div class="flex-1 bg-white rounded-xl p-5 card-shadow border-constraints h-72 flex flex-col">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center text-[#DC3545]">
+<i class="fas fa-ban text-xl"></i>
+</div>
+<div>
+<h3 class="font-bold text-gray-800 text-lg">Constraints</h3>
+<p class="text-xs text-gray-400 font-mono">WHAT NOT to do?</p>
+</div>
+</div>
+<p class="text-sm text-gray-600 mb-3 flex-grow">設定邊界，避免 AI 使用不相容的語法或庫。</p>
+<div class="space-y-2">
+<p class="flex items-center gap-2 text-xs text-gray-500">
+<i class="fas fa-times text-red-400"></i>
+<span class="code-tag">No STL</span>
+</p>
+<p class="flex items-center gap-2 text-xs text-gray-500">
+<i class="fas fa-exclamation-circle text-red-400"></i>
+<span class="code-tag">C++98 Only</span>
+</p>
+</div>
+</div>
+<!-- Operator + -->
+<div class="formula-operator">+</div>
+<!-- 4. Format (格式) -->
+<div class="flex-1 bg-white rounded-xl p-5 card-shadow border-format h-72 flex flex-col">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center text-[#6F42C1]">
+<i class="fas fa-file-code text-xl"></i>
+</div>
+<div>
+<h3 class="font-bold text-gray-800 text-lg">Format</h3>
+<p class="text-xs text-gray-400 font-mono">HOW to output?</p>
+</div>
+</div>
+<p class="text-sm text-gray-600 mb-3 flex-grow">指定輸出的結構，方便直接複製使用。</p>
+<div class="space-y-2">
+<p class="flex items-center gap-2 text-xs text-gray-500">
+<i class="fab fa-markdown text-gray-400"></i>
+<span>Markdown Table</span>
+</p>
+<p class="flex items-center gap-2 text-xs text-gray-500">
+<i class="fas fa-code text-gray-400"></i>
+<span>Code Block with Comments</span>
+</p>
+</div>
+</div>
+<!-- Operator = -->
+<div class="formula-operator text-[#17A2B8]">=</div>
+<!-- Result -->
+<div class="w-48 bg-cyan-50 rounded-xl p-5 border-result h-72 flex flex-col items-center justify-center text-center shadow-lg transform scale-105">
+<div class="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm mb-4 text-[#17A2B8]">
+<i class="fas fa-gem text-3xl"></i>
+</div>
+<h3 class="font-bold text-gray-800 text-lg mb-2">High Quality<br/>Output</h3>
+<p class="text-xs text-gray-500 leading-tight">精準、可用<br/>且符合規範的<br/>解決方案</p>
+<i class="fas fa-check-circle text-[#17A2B8] mt-4 text-xl"></i>
+</div>
+</div>
+<!-- Bottom Tip Box -->
+<div class="mt-12 bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-4 shadow-sm w-full max-w-4xl">
+<div class="bg-gray-800 text-white px-3 py-1 rounded text-xs font-bold uppercase tracking-wider">Pro Tip</div>
+<p class="text-sm text-gray-600 flex-1">
+<span class="font-bold text-gray-800">模糊的輸入 = 模糊的輸出。</span> 
+                    就像寫程式一樣，Prompt 就是你對 AI 下達的 function call，參數越精確，Return 值就越正確。
+                </p>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-16 py-6 flex justify-between items-center text-gray-400 text-xs font-mono relative z-10">
+<p>AI 輔助開發基礎課程 (2026)</p>
+<p>Page 13</p>
+</div>
+</div>
+</body>
+</html>

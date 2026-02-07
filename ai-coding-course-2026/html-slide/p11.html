@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Context 污染與歪樓效應</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .tech-accent {
+            color: #17A2B8;
+        }
+        .bg-tech-accent {
+            background-color: #17A2B8;
+        }
+        .border-tech-accent {
+            border-color: #17A2B8;
+        }
+        .bg-dots {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23E9ECEF'/%3E%3C/svg%3E");
+        }
+        .chat-bubble {
+            position: relative;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .chat-bubble::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 12px;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-right: 6px solid #f3f4f6;
+        }
+        .chat-bubble.ai::before {
+            border-right-color: #F8F9FA; /* Default AI bg */
+        }
+        .chat-bubble.error {
+            background-color: #FEF2F2;
+            border: 1px solid #FECACA;
+        }
+        .chat-bubble.error::before {
+            border-right-color: #FECACA;
+        }
+        .chat-bubble.polluted {
+            transform: rotate(1deg) skewX(-2deg);
+            opacity: 0.8;
+            border: 1px dashed #FECACA;
+        }
+        .chat-bubble.correct {
+            background-color: #ECFDF5;
+            border: 1px solid #A7F3D0;
+        }
+        .chat-bubble.correct::before {
+            border-right-color: #A7F3D0;
+        }
+        .arrow-down-icon {
+            display: flex;
+            justify-content: center;
+            margin: 4px 0;
+            color: #D1D5DB;
+        }
+        /* Custom Code Block Styling */
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-dots">
+<!-- Background Elements -->
+<div class="absolute top-0 right-0 w-[40%] h-full bg-slate-50 border-l border-gray-100 -z-0"></div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-[#17A2B8]"></div>
+<!-- Header Section -->
+<div class="px-16 pt-10 pb-2 flex justify-between items-end relative z-10">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-red-50 text-red-500 text-xs font-bold rounded uppercase tracking-wider border border-red-100">Critical Concept</span>
+<span class="h-px w-8 bg-gray-300"></span>
+</div>
+<h1 class="text-4xl font-black text-gray-800 tracking-tight">Context 污染與「歪樓」效應</h1>
+<p class="text-xl text-gray-500 mt-2 font-light">AI 的「即時記憶」與「理解邊界」：<span class="border-b-2 border-[#17A2B8] text-gray-600">防止錯誤擴散</span></p>
+</div>
+<!-- Top Right Icon -->
+<div class="opacity-100">
+<div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200">
+<i class="fas fa-brain text-[#17A2B8] text-xs"></i>
+<p class="text-xs font-mono text-gray-500">Memory Management</p>
+</div>
+</div>
+</div>
+<!-- Main Content: Visual & Explanation -->
+<div class="flex-1 flex flex-col px-16 py-4 relative z-10">
+<!-- Top Visual: Comparison Flow -->
+<div class="flex items-start justify-center gap-12 mb-8 mt-4 h-[340px]">
+<!-- Scenario A: Context Pollution (Bad) -->
+<div class="flex-1 max-w-md">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-red-500 text-xs font-bold">A</div>
+<h3 class="font-bold text-gray-700 text-sm">污染擴散 (The "Skewed" Flow)</h3>
+</div>
+<span class="bg-red-100 text-red-600 text-[10px] px-2 py-0.5 rounded-full font-bold">DANGER</span>
+</div>
+<div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm h-full relative overflow-hidden">
+<!-- Interaction Steps -->
+<div class="space-y-1">
+<!-- User -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center"><i class="fas fa-user text-gray-400 text-xs"></i></div>
+<div class="chat-bubble bg-gray-50 flex-1 text-gray-600">
+<p>請給我 ReadRegister 的範例。</p>
+</div>
+</div>
+<!-- AI (Error) -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-[#17A2B8] flex-shrink-0 flex items-center justify-center text-white text-xs"><i class="fas fa-robot"></i></div>
+<div class="chat-bubble error flex-1 text-red-800">
+<p class="font-bold text-xs mb-1"><i class="fas fa-exclamation-triangle mr-1"></i>Hallucination</p>
+<p class="code-font text-xs">use API_Unknown_V2(); // 錯誤API</p>
+</div>
+</div>
+<!-- Flow Arrow -->
+<div class="arrow-down-icon"><i class="fas fa-arrow-down"></i></div>
+<!-- User (Follow up) -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center"><i class="fas fa-user text-gray-400 text-xs"></i></div>
+<div class="chat-bubble bg-gray-50 flex-1 text-gray-600">
+<p>那這個 API 怎麼用在迴圈裡？</p>
+</div>
+</div>
+<!-- AI (Polluted) -->
+<div class="flex gap-3 relative">
+<div class="w-8 h-8 rounded-full bg-[#17A2B8] flex-shrink-0 flex items-center justify-center text-white text-xs opacity-50"><i class="fas fa-robot"></i></div>
+<div class="chat-bubble polluted bg-red-50 flex-1 text-gray-500">
+<p class="text-xs text-red-400 font-bold mb-1">Context Polluted</p>
+<p class="code-font text-xs">for(i=0) { API_Unknown_V2(); } ...</p>
+</div>
+<!-- Skew Effect Overlay -->
+<div class="absolute -right-2 top-0 text-red-300 text-4xl opacity-20"><i class="fas fa-bug"></i></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Middle Connector -->
+<div class="flex flex-col items-center justify-center h-full pt-20">
+<div class="w-12 h-12 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center shadow-md z-10">
+<i class="fas fa-random text-gray-400"></i>
+</div>
+<div class="h-full border-l-2 border-dashed border-gray-200 -mt-6"></div>
+</div>
+<!-- Scenario B: Correction (Good) -->
+<div class="flex-1 max-w-md">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-[#17A2B8] flex items-center justify-center text-white text-xs font-bold">B</div>
+<h3 class="font-bold text-gray-700 text-sm">主動修正 (Correction Flow)</h3>
+</div>
+<span class="bg-green-100 text-green-600 text-[10px] px-2 py-0.5 rounded-full font-bold">RECOMMENDED</span>
+</div>
+<div class="bg-white border border-green-100 rounded-xl p-4 shadow-sm h-full relative">
+<!-- Interaction Steps -->
+<div class="space-y-1">
+<!-- User -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center"><i class="fas fa-user text-gray-400 text-xs"></i></div>
+<div class="chat-bubble bg-gray-50 flex-1 text-gray-600">
+<p>請給我 ReadRegister 的範例。</p>
+</div>
+</div>
+<!-- AI (Deleted) -->
+<div class="flex gap-3 opacity-40">
+<div class="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0 flex items-center justify-center text-white text-xs"><i class="fas fa-trash"></i></div>
+<div class="chat-bubble bg-gray-100 border border-gray-200 flex-1 text-gray-400 flex justify-between items-center">
+<span class="text-xs italic line-through">use API_Unknown_V2();</span>
+<i class="fas fa-times-circle text-gray-400"></i>
+</div>
+</div>
+<!-- Action Indicator -->
+<div class="flex justify-center my-1">
+<span class="bg-gray-100 text-gray-500 text-[10px] px-2 py-0.5 rounded border border-gray-200">
+<i class="fas fa-mouse-pointer mr-1"></i>User Deleted Message
+                                </span>
+</div>
+<!-- User (Retry/Edit) -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center"><i class="fas fa-user text-gray-400 text-xs"></i></div>
+<div class="chat-bubble bg-gray-50 flex-1 text-gray-600">
+<p class="text-xs text-gray-400 mb-1">Edited Prompt:</p>
+<p>請用 <span class="text-[#17A2B8] font-bold">ATL 標準語法</span> 寫 ReadRegister。</p>
+</div>
+</div>
+<!-- AI (Correct) -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-[#17A2B8] flex-shrink-0 flex items-center justify-center text-white text-xs"><i class="fas fa-robot"></i></div>
+<div class="chat-bubble correct flex-1 text-green-800">
+<p class="font-bold text-xs mb-1"><i class="fas fa-check-circle mr-1"></i>Verified</p>
+<p class="code-font text-xs">ReadReg(0x100); // 正確</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Key Info Cards (3 Columns) -->
+<div class="grid grid-cols-3 gap-6 h-full mt-auto">
+<!-- Card 1: GIGO Principle -->
+<div class="bg-white p-5 rounded-xl border-l-4 border-gray-300 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3 mb-2">
+<i class="fas fa-recycle text-gray-400"></i>
+<h3 class="text-base font-bold text-gray-800">Garbage In, Garbage Out</h3>
+</div>
+<p class="text-xs text-gray-500 leading-relaxed">
+                    AI 的記憶是「盲目」的。它無法區分正確與錯誤，只會根據 Context 裡的歷史訊息，預測下一句最可能的回答。
+                </p>
+</div>
+<!-- Card 2: Pollution Effect -->
+<div class="bg-white p-5 rounded-xl border-l-4 border-red-400 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3 mb-2">
+<i class="fas fa-viruses text-red-400"></i>
+<h3 class="text-base font-bold text-gray-800">「歪樓」連鎖反應</h3>
+</div>
+<p class="text-xs text-gray-500 leading-relaxed">
+                    一旦 AI 開始胡說八道，若不清除，這個錯誤就會成為「事實背景」，導致後續的推理邏輯全部基於錯誤基礎，越走越偏。
+                </p>
+</div>
+<!-- Card 3: Active Management -->
+<div class="bg-white p-5 rounded-xl border-l-4 border-[#17A2B8] shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3 mb-2">
+<i class="fas fa-eraser text-[#17A2B8]"></i>
+<h3 class="text-base font-bold text-gray-800">主動刪除管理</h3>
+</div>
+<p class="text-xs text-gray-500 leading-relaxed">
+                    發現 AI 答非所問時，<strong class="text-gray-700">不要試圖糾正它</strong>。最有效的方法是直接「刪除」該則回覆，或「編輯」你的上一句提問，讓 Context 重置。
+                </p>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-16 py-4 flex justify-between items-center text-gray-400 text-xs font-mono relative z-10">
+<p>AI 輔助開發基礎課程 (2026)</p>
+<p>Page 11</p>
+</div>
+</div>
+</div></body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>資安意識：如何安全地餵資料？</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .tech-accent {
+            color: #17A2B8;
+        }
+        .bg-tech-accent {
+            background-color: #17A2B8;
+        }
+        .border-tech-accent {
+            border-color: #17A2B8;
+        }
+        .bg-dots {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23E9ECEF'/%3E%3C/svg%3E");
+        }
+        .pipeline-arrow {
+            position: relative;
+        }
+        .pipeline-arrow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -20px;
+            transform: translateY(-50%);
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 15px solid #E5E7EB;
+        }
+        /* Custom Code Block Styling */
+        .code-snippet {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-dots">
+<!-- Background Elements -->
+<div class="absolute top-0 right-0 w-[30%] h-full bg-slate-50 border-l border-gray-100 -z-0"></div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-[#17A2B8]"></div>
+<!-- Header Section -->
+<div class="px-16 pt-12 pb-4 flex justify-between items-end relative z-10">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-red-50 text-red-500 text-xs font-bold rounded uppercase tracking-wider border border-red-100">Security First</span>
+<span class="h-px w-8 bg-gray-300"></span>
+</div>
+<h1 class="text-4xl font-black text-gray-800 tracking-tight">資安意識：如何安全地餵資料？</h1>
+<p class="text-xl text-gray-500 mt-2 font-light">在保護公司資產的前提下使用 AI：<span class="border-b-2 border-[#17A2B8] text-gray-600">脫敏與 IP 保護</span></p>
+</div>
+<!-- Top Right Icon -->
+<div class="opacity-100">
+<div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200">
+<i class="fas fa-shield-alt text-[#17A2B8] text-xs"></i>
+<p class="text-xs font-mono text-gray-500">Data Privacy Protocol</p>
+</div>
+</div>
+</div>
+<!-- Main Content: Data Transformation Pipeline -->
+<div class="flex-1 flex flex-col px-16 py-6 relative z-10">
+<!-- Pipeline Visualization -->
+<div class="flex items-center justify-between gap-6 mb-10 mt-4">
+<!-- Stage 1: Raw Data (Input) -->
+<div class="flex-1 relative group">
+<div class="absolute -top-3 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md z-20">INPUT</div>
+<div class="bg-white border-2 border-red-100 rounded-xl p-5 shadow-sm relative overflow-hidden h-48 flex flex-col">
+<div class="absolute top-0 right-0 p-2 opacity-10">
+<i class="fas fa-file-medical-alt text-red-500 text-6xl"></i>
+</div>
+<div class="flex items-center gap-2 mb-3 border-b border-red-50 pb-2">
+<i class="fas fa-exclamation-triangle text-red-500"></i>
+<p class="font-bold text-gray-700">原始資料流</p>
+</div>
+<div class="bg-red-50 rounded p-3 flex-1 overflow-hidden relative">
+<p class="code-snippet text-gray-400">Project: <span class="bg-red-200 text-red-800 px-1 rounded">Titan_X</span></p>
+<p class="code-snippet text-gray-400">Client: <span class="bg-red-200 text-red-800 px-1 rounded">Apple Inc.</span></p>
+<p class="code-snippet text-gray-400">Yield: <span class="bg-red-200 text-red-800 px-1 rounded">98.2%</span></p>
+<p class="code-snippet text-gray-400 mt-1">// Core Logic...</p>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-red-50/90 pointer-events-none"></div>
+</div>
+</div>
+</div>
+<!-- Process Arrow -->
+<div class="w-24 flex flex-col items-center justify-center relative">
+<div class="h-1 w-full bg-gray-200 absolute top-1/2 -translate-y-1/2 -z-10"></div>
+<div class="w-16 h-16 bg-white border-4 border-[#17A2B8] rounded-full flex items-center justify-center shadow-lg z-10">
+<i class="fas fa-filter text-[#17A2B8] text-xl"></i>
+</div>
+<p class="text-xs font-bold text-[#17A2B8] mt-20 bg-cyan-50 px-2 py-1 rounded">De-identification</p>
+</div>
+<!-- Stage 2: Clean Data (Output) -->
+<div class="flex-1 relative group">
+<div class="absolute -top-3 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md z-20">OUTPUT</div>
+<div class="bg-white border-2 border-green-100 rounded-xl p-5 shadow-sm relative overflow-hidden h-48 flex flex-col">
+<div class="absolute top-0 right-0 p-2 opacity-10">
+<i class="fas fa-file-shield text-green-500 text-6xl"></i>
+</div>
+<div class="flex items-center gap-2 mb-3 border-b border-green-50 pb-2">
+<i class="fas fa-check-circle text-green-500"></i>
+<p class="font-bold text-gray-700">脫敏資料流</p>
+</div>
+<div class="bg-green-50 rounded p-3 flex-1 overflow-hidden relative">
+<p class="code-snippet text-gray-500">Project: <span class="bg-green-200 text-green-800 px-1 rounded">Project_A</span></p>
+<p class="code-snippet text-gray-500">Client: <span class="bg-green-200 text-green-800 px-1 rounded">Customer</span></p>
+<p class="code-snippet text-gray-500">Yield: <span class="bg-green-200 text-green-800 px-1 rounded">Target_Val</span></p>
+<p class="code-snippet text-gray-500 mt-1">// Logic Snippet...</p>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-green-50/90 pointer-events-none"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Key Info Cards (3 Columns) -->
+<div class="grid grid-cols-3 gap-8 h-full">
+<!-- Card 1: De-identification Principles -->
+<div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+<div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center mb-4 text-[#17A2B8]">
+<i class="fas fa-user-secret text-lg"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-2">脫敏原則 (De-id)</h3>
+<p class="text-sm text-gray-500 leading-relaxed mb-3">
+                    主動替換敏感關鍵字，將具體數據抽象化。
+                </p>
+<ul class="text-sm text-gray-600 space-y-2">
+<li class="flex items-start gap-2">
+<i class="fas fa-times text-red-400 mt-1 text-xs"></i>
+<span class="line-through text-gray-400">Project_Titan, Apple</span>
+</li>
+<li class="flex items-start gap-2">
+<i class="fas fa-check text-green-500 mt-1 text-xs"></i>
+<span>Project_A, Customer</span>
+</li>
+</ul>
+</div>
+<!-- Card 2: Core IP Protection -->
+<div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+<div class="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center mb-4 text-purple-500">
+<i class="fas fa-box-open text-lg"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-2">核心 IP 保護</h3>
+<p class="text-sm text-gray-500 leading-relaxed mb-3">
+                    避免上傳整份架構文件。僅擷取當下需要解決的<strong class="text-gray-700">最小程式碼片段</strong>。
+                </p>
+<div class="bg-gray-50 p-2 rounded text-xs text-gray-500 font-mono border-l-2 border-purple-400">
+                    Snippet Only.<br/>No Full Documentation.
+                </div>
+</div>
+<!-- Card 3: API Risk Awareness -->
+<div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+<div class="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center mb-4 text-orange-500">
+<i class="fas fa-cloud-upload-alt text-lg"></i>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-2">API 風險意識</h3>
+<p class="text-sm text-gray-500 leading-relaxed mb-3">
+                    工具雖為內部開發，但 API 終點是 <strong class="text-gray-700">OpenAI</strong>。
+                </p>
+<p class="text-xs text-orange-600 bg-orange-50 px-2 py-1 rounded inline-block font-bold">
+<i class="fas fa-exclamation-circle mr-1"></i> Data leaves the premise
+                </p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-16 py-6 flex justify-between items-center text-gray-400 text-xs font-mono relative z-10">
+<p>AI 輔助開發基礎課程 (2026)</p>
+<p>Page 04</p>
+</div>
+</div>
+</body>
+</html>

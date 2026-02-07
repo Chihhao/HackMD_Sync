@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Markdown：AI 的母語</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .bg-dots {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23E9ECEF'/%3E%3C/svg%3E");
+        }
+        .arrow-down {
+            width: 0; 
+            height: 0; 
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container bg-dots">
+<!-- Background Elements -->
+<div class="absolute top-0 right-0 w-[40%] h-full bg-slate-50 border-l border-gray-100 -z-0"></div>
+<!-- Header Section -->
+<div class="px-16 pt-12 pb-4 flex justify-between items-end relative z-10">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2 py-1 bg-gray-100 text-gray-500 text-xs font-bold rounded uppercase tracking-wider">Basic Tools</span>
+<span class="h-px w-8 bg-gray-300"></span>
+</div>
+<h1 class="text-4xl font-black text-gray-800 tracking-tight">Markdown：AI 的母語</h1>
+<p class="text-xl text-gray-500 mt-2 font-light">基礎工具：<span class="border-b-2 border-[#17A2B8] text-gray-600">溝通與紀錄的標準格式</span></p>
+</div>
+<!-- Top Right Icon -->
+<div class="opacity-100">
+<div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200">
+<i class="fas fa-code text-gray-400 text-xs"></i>
+<p class="text-xs font-mono text-gray-500">Plain Text Standard</p>
+</div>
+</div>
+</div>
+<!-- Main Content: Split Layout -->
+<div class="flex-1 flex px-16 py-4 relative z-10 gap-12 items-center">
+<!-- Left Column: Legacy vs Markdown -->
+<div class="flex-1 flex flex-col h-full justify-center">
+<div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 relative overflow-hidden group h-[420px] flex flex-col">
+<!-- Background Watermark -->
+<div class="absolute -left-4 -bottom-4 text-gray-50 opacity-50 text-9xl pointer-events-none">
+<i class="fab fa-markdown"></i>
+</div>
+<div class="relative z-10 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center">
+<i class="fas fa-file-alt text-gray-500 text-lg"></i>
+</div>
+<h2 class="text-2xl font-bold text-gray-700">格式友善度對比</h2>
+</div>
+<!-- Comparison Visualization -->
+<div class="flex-1 flex flex-col gap-4">
+<!-- Legacy Block -->
+<div class="p-4 bg-red-50 rounded-xl border border-red-100 relative">
+<div class="absolute right-4 top-1/2 -translate-y-1/2">
+<i class="fas fa-ban text-red-300 text-3xl"></i>
+</div>
+<div class="flex gap-4 mb-2">
+<i class="fas fa-file-word text-blue-700 text-2xl"></i>
+<i class="fas fa-file-powerpoint text-orange-600 text-2xl"></i>
+<i class="fas fa-file-excel text-green-700 text-2xl"></i>
+</div>
+<p class="font-bold text-gray-700">Office 傳統格式</p>
+<p class="text-xs text-gray-500 mt-1">隱藏排版代碼多，AI 難以精準解析內容結構。</p>
+</div>
+<!-- Arrow Divider -->
+<div class="flex justify-center -my-2 z-10">
+<div class="bg-white px-2 py-1 rounded-full border border-gray-200 text-xs font-bold text-gray-400 shadow-sm">VS</div>
+</div>
+<!-- Markdown Block -->
+<div class="p-4 bg-cyan-50 rounded-xl border border-cyan-100 relative">
+<div class="absolute right-4 top-1/2 -translate-y-1/2">
+<i class="fas fa-check-circle text-[#17A2B8] text-3xl"></i>
+</div>
+<div class="flex gap-3 mb-2 items-center">
+<i class="fab fa-markdown text-gray-800 text-2xl"></i>
+<span class="font-mono text-xs bg-gray-800 text-white px-1 rounded">.md</span>
+</div>
+<p class="font-bold text-gray-800">Markdown 純文字</p>
+<p class="text-xs text-gray-600 mt-1">結構即內容，AI 讀取零誤差，Token 消耗最少。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Workflow Automation -->
+<div class="flex-1 flex flex-col h-full justify-center transform translate-y-4">
+<div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden ring-1 ring-black/5 h-[420px] flex flex-col">
+<!-- Top Highlight Bar -->
+<div class="absolute top-0 left-0 w-full h-1 bg-[#17A2B8]"></div>
+<!-- Decorative Glow -->
+<div class="absolute -bottom-24 -right-24 w-56 h-56 bg-[#17A2B8] rounded-full blur-3xl opacity-10"></div>
+<div class="relative z-10 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-lg bg-[#17A2B8] flex items-center justify-center text-white shadow-lg shadow-cyan-500/30">
+<i class="fas fa-magic text-lg"></i>
+</div>
+<div>
+<h2 class="text-2xl font-bold text-gray-800">小旺匯出工作流</h2>
+<p class="text-xs text-gray-400 font-mono tracking-wide">AUTOMATED REPORTING</p>
+</div>
+</div>
+<!-- Workflow Visualization -->
+<div class="flex-1 flex flex-col items-center justify-center relative">
+<!-- Step 1: Xiaowang -->
+<div class="w-full flex items-center gap-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
+<div class="w-10 h-10 rounded bg-[#0056B3] flex items-center justify-center text-white flex-shrink-0">
+<i class="fas fa-robot"></i>
+</div>
+<div>
+<p class="font-bold text-gray-700 text-sm">AI 小旺對話視窗</p>
+<p class="text-xs text-gray-500">生成代碼解釋與分析報告</p>
+</div>
+</div>
+<!-- Transition Arrow -->
+<div class="h-8 border-l-2 border-dashed border-[#17A2B8] my-1 relative">
+<div class="absolute top-1/2 left-4 -translate-y-1/2 whitespace-nowrap bg-white px-2 py-1 rounded text-xs text-[#17A2B8] font-bold border border-cyan-100 shadow-sm">
+<i class="fas fa-file-export mr-1"></i> 整串匯出
+                            </div>
+</div>
+<!-- Step 2: HedgeDoc -->
+<div class="w-full flex items-center gap-4 p-3 bg-green-50 rounded-lg border border-green-200">
+<div class="w-10 h-10 rounded bg-green-600 flex items-center justify-center text-white flex-shrink-0">
+<i class="fas fa-file-alt"></i>
+</div>
+<div>
+<p class="font-bold text-gray-700 text-sm">HedgeDoc 技術筆記</p>
+<p class="text-xs text-gray-500">Ctrl+V 貼上，自動渲染排版</p>
+</div>
+</div>
+</div>
+<!-- Benefit List -->
+<div class="mt-6 space-y-3">
+<div class="flex items-start gap-3">
+<i class="fas fa-check text-[#17A2B8] mt-1 text-sm"></i>
+<p class="text-sm text-gray-600"><span class="font-bold text-gray-800">數位轉型第一步：</span>拋棄 Word，改用 Markdown 記錄大小事。</p>
+</div>
+<div class="flex items-start gap-3">
+<i class="fas fa-check text-[#17A2B8] mt-1 text-sm"></i>
+<p class="text-sm text-gray-600"><span class="font-bold text-gray-800">高效協作：</span>一份文件同時是報告、網頁與簡報。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-16 py-6 flex justify-between items-center text-gray-400 text-xs font-mono relative z-10">
+<p>AI 輔助開發基礎課程 (2026)</p>
+<p>Page 05</p>
+</div>
+</div>
+</body>
+</html>
