@@ -133,7 +133,10 @@
 
     <!-- Presentation Modal -->
     <div id="presentation-mode" class="fixed inset-0 z-[100] bg-black hidden transition-opacity duration-300">
-        <iframe id="main-frame" class="w-full h-full border-none bg-black"></iframe>
+        <div class="relative w-full h-full">
+            <iframe id="frame-1" class="absolute inset-0 w-full h-full border-none bg-black opacity-0 transition-opacity duration-300"></iframe>
+            <iframe id="frame-2" class="absolute inset-0 w-full h-full border-none bg-black opacity-0 transition-opacity duration-300"></iframe>
+        </div>
         
         <!-- Controls -->
         <div class="absolute bottom-8 right-8 flex gap-4 z-50">
@@ -193,6 +196,7 @@
 
         // Presentation Logic
         let currentSlideIndex = 1;
+        let activeFrameId = 'frame-2';
 
         function openPresentation(index) {
             currentSlideIndex = index;
@@ -204,9 +208,11 @@
 
         function closePresentation() {
             const modal = document.getElementById('presentation-mode');
-            const frame = document.getElementById('main-frame');
+            const f1 = document.getElementById('frame-1');
+            const f2 = document.getElementById('frame-2');
             modal.classList.add('hidden');
-            frame.src = ''; 
+            f1.src = ''; f1.classList.add('opacity-0');
+            f2.src = ''; f2.classList.add('opacity-0');
             document.body.style.overflow = '';
         }
 
@@ -219,16 +225,27 @@
         }
 
         function updateSlide() {
-            const frame = document.getElementById('main-frame');
+            const nextFrameId = activeFrameId === 'frame-1' ? 'frame-2' : 'frame-1';
+            const nextFrame = document.getElementById(nextFrameId);
+            const currentFrame = document.getElementById(activeFrameId);
+            
             const pageNum = currentSlideIndex.toString().padStart(2, '0');
-            frame.src = `p${pageNum}.html`;
+            
+            nextFrame.onload = () => {
+                scaleSlideContent(nextFrame);
+                nextFrame.classList.remove('opacity-0');
+                currentFrame.classList.add('opacity-0');
+                activeFrameId = nextFrameId;
+            };
+            
+            nextFrame.src = `p${pageNum}.html`;
             
             document.getElementById('btn-prev').disabled = currentSlideIndex === 1;
             document.getElementById('btn-next').disabled = currentSlideIndex === totalSlides;
         }
 
-        function scaleSlideContent() {
-            const frame = document.getElementById('main-frame');
+        function scaleSlideContent(frame) {
+            if (!frame) return;
             try {
                 const doc = frame.contentDocument || frame.contentWindow.document;
                 const container = doc.querySelector('.slide-container');
@@ -248,10 +265,10 @@
             } catch(e) {}
         }
 
-        document.getElementById('main-frame').onload = scaleSlideContent;
         window.addEventListener('resize', () => {
             if (!document.getElementById('presentation-mode').classList.contains('hidden')) {
-                scaleSlideContent();
+                scaleSlideContent(document.getElementById('frame-1'));
+                scaleSlideContent(document.getElementById('frame-2'));
             }
         });
 
